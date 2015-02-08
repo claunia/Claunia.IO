@@ -25,10 +25,7 @@
 // THE SOFTWARE.
 
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Security;
 using System;
-using System.IO;
 
 #if !MOBILE
 using System.Security.AccessControl;
@@ -43,166 +40,179 @@ namespace Claunia.IO
         // As FileInfo is sealed, let's gonna cheat a little :p
         readonly System.IO.FileInfo _fileInfo;
 
-        public FileInfo (string fileName)
+        public FileInfo(string fileName)
         {
             _fileInfo = new System.IO.FileInfo(fileName);
         }
 
         // For manual casting
-        public FileInfo (System.IO.FileInfo fileInfo)
+        public FileInfo(System.IO.FileInfo fileInfo)
         {
             _fileInfo = fileInfo;
         }
 
-        public override bool Exists {
-            get {
+        public override bool Exists
+        {
+            get
+            {
                 return _fileInfo.Exists;
             }
         }
 
-        public override string Name {
-            get {
+        public override string Name
+        {
+            get
+            {
                 return _fileInfo.Name;
             }
         }
 
-        public bool IsReadOnly {
-            get {
+        public bool IsReadOnly
+        {
+            get
+            {
                 return _fileInfo.IsReadOnly;
             }
 
-            set {
+            set
+            {
                 _fileInfo.IsReadOnly = value;
             }
         }
 
-        public void Encrypt ()
+        public void Encrypt()
         {
             _fileInfo.Encrypt();
         }
 
-        public void Decrypt ()
+        public void Decrypt()
         {
             _fileInfo.Decrypt();
         }
 
-        public long Length {
-            get {
+        public long Length
+        {
+            get
+            {
                 return _fileInfo.Length;
             }
         }
 
-        public string DirectoryName {
-            get {
+        public string DirectoryName
+        {
+            get
+            {
                 return _fileInfo.DirectoryName;
             }
         }
 
-        public DirectoryInfo Directory {
-            get {
+        public DirectoryInfo Directory
+        {
+            get
+            {
                 return new DirectoryInfo(_fileInfo.Directory);
             }
         }
 
-        public StreamReader OpenText ()
+        public System.IO.StreamReader OpenText()
         {
             return _fileInfo.OpenText();
         }
 
-        public StreamWriter CreateText ()
+        public System.IO.StreamWriter CreateText()
         {
             return _fileInfo.CreateText();
         }
 
-        public StreamWriter AppendText ()
+        public System.IO. StreamWriter AppendText()
         {
             return _fileInfo.AppendText();
         }
 
-        public FileStream Create ()
+        public System.IO.FileStream Create()
         {
             return _fileInfo.Create();
         }
 
-        public FileStream OpenRead ()
+        public System.IO.FileStream OpenRead()
         {
             return _fileInfo.OpenRead();
         }
 
-        public FileStream OpenWrite ()
+        public System.IO.FileStream OpenWrite()
         {
             return _fileInfo.OpenWrite();
         }
 
-        public FileStream Open (FileMode mode)
+        public System.IO.FileStream Open(System.IO.FileMode mode)
         {
             return _fileInfo.Open(mode);
         }
 
-        public FileStream Open (FileMode mode, FileAccess access)
+        public System.IO.FileStream Open(System.IO.FileMode mode, System.IO.FileAccess access)
         {
             return _fileInfo.Open(mode, access);
         }
 
-        public FileStream Open (FileMode mode, FileAccess access, FileShare share)
+        public System.IO.FileStream Open(System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share)
         {
             return _fileInfo.Open(mode, access, share);
         }
 
-        public override void Delete ()
+        public override void Delete()
         {
             _fileInfo.Delete();
         }
 
-        public void MoveTo (string destFileName)
+        public void MoveTo(string destFileName)
         {
             _fileInfo.MoveTo(destFileName);
         }
 
-        public FileInfo CopyTo (string destFileName)
+        public FileInfo CopyTo(string destFileName)
         {
             System.IO.FileInfo tmpFileInfo = _fileInfo.CopyTo(destFileName);
             return new FileInfo(tmpFileInfo);
         }
 
-        public FileInfo CopyTo (string destFileName, bool overwrite)
+        public FileInfo CopyTo(string destFileName, bool overwrite)
         {
             System.IO.FileInfo tmpFileInfo = _fileInfo.CopyTo(destFileName, overwrite);
             return new FileInfo(tmpFileInfo);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return _fileInfo.ToString();
         }
 
         #if !MOBILE
-        public FileSecurity GetAccessControl ()
+        public FileSecurity GetAccessControl()
         {
             return _fileInfo.GetAccessControl();
         }
 
-        public FileSecurity GetAccessControl (AccessControlSections includeSections)
+        public FileSecurity GetAccessControl(AccessControlSections includeSections)
         {
             return _fileInfo.GetAccessControl(includeSections);
         }
 
-        public FileInfo Replace (string destinationFileName,
-            string destinationBackupFileName)
+        public FileInfo Replace(string destinationFileName,
+                                 string destinationBackupFileName)
         {
-            System.IO.FileInfo tmpFileInfo =_fileInfo.Replace(destinationFileName, destinationBackupFileName);
+            System.IO.FileInfo tmpFileInfo = _fileInfo.Replace(destinationFileName, destinationBackupFileName);
             return new FileInfo(tmpFileInfo);
         }
 
-        public FileInfo Replace (string destinationFileName,
-            string destinationBackupFileName,
-            bool ignoreMetadataErrors)
+        public FileInfo Replace(string destinationFileName,
+                                 string destinationBackupFileName,
+                                 bool ignoreMetadataErrors)
         {
             System.IO.FileInfo tmpFileInfo = _fileInfo.Replace(destinationFileName, destinationBackupFileName, ignoreMetadataErrors);
             return new FileInfo(tmpFileInfo);
         }
 
-        public void SetAccessControl (FileSecurity fileSecurity)
+        public void SetAccessControl(FileSecurity fileSecurity)
         {
             _fileInfo.SetAccessControl(fileSecurity);
         }

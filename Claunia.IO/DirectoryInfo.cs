@@ -46,220 +46,227 @@ namespace Claunia.IO
         }
 
         // For manual casting
-        public DirectoryInfo (System.IO.DirectoryInfo dirInfo)
+        public DirectoryInfo(System.IO.DirectoryInfo dirInfo)
         {
             _dirInfo = dirInfo;
         }
 
-        public override bool Exists {
-            get {
+        public override bool Exists
+        {
+            get
+            {
                 return _dirInfo.Exists;
             }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return _dirInfo.Name; }
         }
 
-        public DirectoryInfo Parent {
-            get {
+        public DirectoryInfo Parent
+        {
+            get
+            {
                 return new DirectoryInfo(_dirInfo.Parent);
             }
         }
 
-        public DirectoryInfo Root {
-            get {
+        public DirectoryInfo Root
+        {
+            get
+            {
                 return new DirectoryInfo(_dirInfo.Root);
             }
         }
 
-        public void Create ()
+        public void Create()
         {
             _dirInfo.Create();
         }
 
-        public DirectoryInfo CreateSubdirectory (string path)
+        public DirectoryInfo CreateSubdirectory(string path)
         {
             return new DirectoryInfo(_dirInfo.CreateSubdirectory(path));
         }
 
-        public FileInfo [] GetFiles ()
+        public FileInfo [] GetFiles()
         {
-                System.IO.FileInfo[] _systemFileInfos = _dirInfo.GetFiles();
-                FileInfo[] _fileInfos = new FileInfo[_systemFileInfos.Length];
+            System.IO.FileInfo[] _systemFileInfos = _dirInfo.GetFiles();
+            FileInfo[] _fileInfos = new FileInfo[_systemFileInfos.Length];
 
-                for(int i = 0; i < _fileInfos.Length; i++)
+            for (int i = 0; i < _fileInfos.Length; i++)
                 _fileInfos[i] = new FileInfo(_systemFileInfos[i]);
 
             return _fileInfos;
         }
 
-        public FileInfo [] GetFiles (string searchPattern)
+        public FileInfo [] GetFiles(string searchPattern)
         {
-                System.IO.FileInfo[] _systemFileInfos = _dirInfo.GetFiles(searchPattern);
-                FileInfo[] _fileInfos = new FileInfo[_systemFileInfos.Length];
+            System.IO.FileInfo[] _systemFileInfos = _dirInfo.GetFiles(searchPattern);
+            FileInfo[] _fileInfos = new FileInfo[_systemFileInfos.Length];
 
-                for(int i = 0; i < _fileInfos.Length; i++)
+            for (int i = 0; i < _fileInfos.Length; i++)
                 _fileInfos[i] = new FileInfo(_systemFileInfos[i]);
 
             return _fileInfos;
         }
 
-        public FileInfo[] GetFiles (string searchPattern, System.IO.SearchOption searchOption)
+        public FileInfo[] GetFiles(string searchPattern, System.IO.SearchOption searchOption)
         {
             System.IO.FileInfo[] _systemFileInfos = _dirInfo.GetFiles(searchPattern, searchOption);
             FileInfo[] _fileInfos = new FileInfo[_systemFileInfos.Length];
 
-            for(int i = 0; i < _fileInfos.Length; i++)
+            for (int i = 0; i < _fileInfos.Length; i++)
                 _fileInfos[i] = new FileInfo(_systemFileInfos[i]);
 
             return _fileInfos;
         }
 
 
-        public DirectoryInfo [] GetDirectories ()
+        public DirectoryInfo [] GetDirectories()
         {
             System.IO.DirectoryInfo[] _systemDirInfos = _dirInfo.GetDirectories();
             DirectoryInfo[] _dirInfos = new DirectoryInfo[_systemDirInfos.Length];
 
-            for(int i = 0; i < _dirInfos.Length; i++)
+            for (int i = 0; i < _dirInfos.Length; i++)
                 _dirInfos[i] = new DirectoryInfo(_systemDirInfos[i]);
 
             return _dirInfos;
         }
 
-        public DirectoryInfo [] GetDirectories (string searchPattern)
+        public DirectoryInfo [] GetDirectories(string searchPattern)
         {
             System.IO.DirectoryInfo[] _systemDirInfos = _dirInfo.GetDirectories(searchPattern);
             DirectoryInfo[] _dirInfos = new DirectoryInfo[_systemDirInfos.Length];
 
-            for(int i = 0; i < _dirInfos.Length; i++)
+            for (int i = 0; i < _dirInfos.Length; i++)
                 _dirInfos[i] = new DirectoryInfo(_systemDirInfos[i]);
 
             return _dirInfos;
         }
 
-        public DirectoryInfo[] GetDirectories (string searchPattern, System.IO.SearchOption searchOption)
+        public DirectoryInfo[] GetDirectories(string searchPattern, System.IO.SearchOption searchOption)
         {
             System.IO.DirectoryInfo[] _systemDirInfos = _dirInfo.GetDirectories(searchPattern, searchOption);
             DirectoryInfo[] _dirInfos = new DirectoryInfo[_systemDirInfos.Length];
 
-            for(int i = 0; i < _dirInfos.Length; i++)
+            for (int i = 0; i < _dirInfos.Length; i++)
                 _dirInfos[i] = new DirectoryInfo(_systemDirInfos[i]);
 
             return _dirInfos;
-        }   
+        }
 
-        public System.IO.FileSystemInfo [] GetFileSystemInfos ()
+        public System.IO.FileSystemInfo [] GetFileSystemInfos()
         {
             return _dirInfo.GetFileSystemInfos();
         }
 
-        public System.IO.FileSystemInfo [] GetFileSystemInfos (string searchPattern)
+        public System.IO.FileSystemInfo [] GetFileSystemInfos(string searchPattern)
         {
             return _dirInfo.GetFileSystemInfos(searchPattern);
         }
 
         public
-        System.IO.FileSystemInfo [] GetFileSystemInfos (string searchPattern, System.IO.SearchOption searchOption)
+        System.IO.FileSystemInfo [] GetFileSystemInfos(string searchPattern, System.IO.SearchOption searchOption)
         {
             return _dirInfo.GetFileSystemInfos(searchPattern, searchOption);
         }
 
-        public override void Delete ()
+        public override void Delete()
         {
             _dirInfo.Delete();
         }
 
-        public void Delete (bool recursive)
+        public void Delete(bool recursive)
         {
             _dirInfo.Delete(recursive);
         }
 
-        public void MoveTo (string destDirName)
+        public void MoveTo(string destDirName)
         {
             _dirInfo.MoveTo(destDirName);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return _dirInfo.ToString();
         }
 
-#if !MOBILE
-        public void Create (DirectorySecurity directorySecurity)
+        #if !MOBILE
+        public void Create(DirectorySecurity directorySecurity)
         {
             _dirInfo.Create(directorySecurity);
         }
 
-        public DirectoryInfo CreateSubdirectory (string path, DirectorySecurity directorySecurity)
+        public DirectoryInfo CreateSubdirectory(string path, DirectorySecurity directorySecurity)
         {
             return new DirectoryInfo(_dirInfo.CreateSubdirectory(path, directorySecurity));
         }
 
-        public DirectorySecurity GetAccessControl ()
+        public DirectorySecurity GetAccessControl()
         {
             return _dirInfo.GetAccessControl();
         }
 
-        public DirectorySecurity GetAccessControl (AccessControlSections includeSections)
+        public DirectorySecurity GetAccessControl(AccessControlSections includeSections)
         {
             return _dirInfo.GetAccessControl(includeSections);
         }
 
-        public void SetAccessControl (DirectorySecurity directorySecurity)
+        public void SetAccessControl(DirectorySecurity directorySecurity)
         {
             _dirInfo.SetAccessControl(directorySecurity);
         }
-#endif
+        #endif
 
-        public IEnumerable<DirectoryInfo> EnumerateDirectories ()
+        public IEnumerable<DirectoryInfo> EnumerateDirectories()
         {
-            foreach(System.IO.DirectoryInfo _sysDirInfo in _dirInfo.EnumerateDirectories())
+            foreach (System.IO.DirectoryInfo _sysDirInfo in _dirInfo.EnumerateDirectories())
                 yield return new DirectoryInfo(_sysDirInfo);
         }
 
-        public IEnumerable<DirectoryInfo> EnumerateDirectories (string searchPattern)
+        public IEnumerable<DirectoryInfo> EnumerateDirectories(string searchPattern)
         {
-            foreach(System.IO.DirectoryInfo _sysDirInfo in _dirInfo.EnumerateDirectories(searchPattern))
+            foreach (System.IO.DirectoryInfo _sysDirInfo in _dirInfo.EnumerateDirectories(searchPattern))
                 yield return new DirectoryInfo(_sysDirInfo);
         }
 
-        public IEnumerable<DirectoryInfo> EnumerateDirectories (string searchPattern, System.IO.SearchOption searchOption)
+        public IEnumerable<DirectoryInfo> EnumerateDirectories(string searchPattern, System.IO.SearchOption searchOption)
         {
-            foreach(System.IO.DirectoryInfo _sysDirInfo in _dirInfo.EnumerateDirectories(searchPattern, searchOption))
+            foreach (System.IO.DirectoryInfo _sysDirInfo in _dirInfo.EnumerateDirectories(searchPattern, searchOption))
                 yield return new DirectoryInfo(_sysDirInfo);
         }
 
-        public IEnumerable<FileInfo> EnumerateFiles ()
+        public IEnumerable<FileInfo> EnumerateFiles()
         {
-            foreach(System.IO.FileInfo _sysFileInfo in _dirInfo.EnumerateFiles())
+            foreach (System.IO.FileInfo _sysFileInfo in _dirInfo.EnumerateFiles())
                 yield return new FileInfo(_sysFileInfo);
         }
 
-        public IEnumerable<FileInfo> EnumerateFiles (string searchPattern)
+        public IEnumerable<FileInfo> EnumerateFiles(string searchPattern)
         {
-            foreach(System.IO.FileInfo _sysFileInfo in _dirInfo.EnumerateFiles(searchPattern))
+            foreach (System.IO.FileInfo _sysFileInfo in _dirInfo.EnumerateFiles(searchPattern))
                 yield return new FileInfo(_sysFileInfo);
         }
 
-        public IEnumerable<FileInfo> EnumerateFiles (string searchPattern, System.IO.SearchOption searchOption)
+        public IEnumerable<FileInfo> EnumerateFiles(string searchPattern, System.IO.SearchOption searchOption)
         {
-            foreach(System.IO.FileInfo _sysFileInfo in _dirInfo.EnumerateFiles(searchPattern, searchOption))
+            foreach (System.IO.FileInfo _sysFileInfo in _dirInfo.EnumerateFiles(searchPattern, searchOption))
                 yield return new FileInfo(_sysFileInfo);
         }
 
-        public IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos ()
+        public IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos()
         {
             return _dirInfo.EnumerateFileSystemInfos();
         }
 
-        public IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos (string searchPattern)
+        public IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos(string searchPattern)
         {
             return _dirInfo.EnumerateFileSystemInfos(searchPattern);
         }
 
-        public IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos (string searchPattern, System.IO.SearchOption searchOption)
+        public IEnumerable<System.IO.FileSystemInfo> EnumerateFileSystemInfos(string searchPattern, System.IO.SearchOption searchOption)
         {
             return _dirInfo.EnumerateFileSystemInfos(searchPattern, searchOption);
         }

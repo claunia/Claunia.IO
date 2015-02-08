@@ -1,5 +1,11 @@
 2015-02-08  Natalia Portillo  <claunia@claunia.com>
 
+	* FileInfo.cs:
+	* DirectoryInfo.cs:
+	  Remove sporious Using statements, and formatted.
+
+2015-02-08  Natalia Portillo  <claunia@claunia.com>
+
 	* DirectoryInfo.cs:
 	  Created DirectoryInfo class that cheats to inherint
 	  System.IO.DirectoryInfo
