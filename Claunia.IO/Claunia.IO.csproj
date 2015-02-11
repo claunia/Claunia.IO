@@ -34,6 +34,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileInfo.cs" />
     <Compile Include="DirectoryInfo.cs" />
+    <Compile Include="FileSystemInfo.cs" />
+    <Compile Include="AppleEnums.cs" />
+    <Compile Include="AppleStructs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -35,7 +35,7 @@ namespace Claunia.IO
 {
     [SerializableAttribute]
     [ComVisibleAttribute(true)]
-    public sealed class FileInfo : System.IO.FileSystemInfo
+    public sealed class FileInfo : FileSystemInfo
     {
         // As FileInfo is sealed, let's gonna cheat a little :p
         readonly System.IO.FileInfo _fileInfo;
@@ -43,6 +43,9 @@ namespace Claunia.IO
         public FileInfo(string fileName)
         {
             _fileInfo = new System.IO.FileInfo(fileName);
+
+            OriginalPath = fileName;
+            FullPath = System.IO.Path.GetFullPath (fileName);
         }
 
         // For manual casting

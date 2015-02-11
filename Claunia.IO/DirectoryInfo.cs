@@ -36,13 +36,16 @@ namespace Claunia.IO
 {
     [SerializableAttribute]
     [ComVisibleAttribute(true)]
-    public sealed class DirectoryInfo : System.IO.FileSystemInfo
+    public sealed class DirectoryInfo : FileSystemInfo
     {
-        System.IO.DirectoryInfo _dirInfo;
+        readonly System.IO.DirectoryInfo _dirInfo;
 
         public DirectoryInfo(String path)
         {
             _dirInfo = new System.IO.DirectoryInfo(path);
+
+            OriginalPath = path;
+            FullPath = System.IO.Path.GetFullPath (path);
         }
 
         // For manual casting

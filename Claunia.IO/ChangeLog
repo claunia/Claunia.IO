@@ -1,3 +1,15 @@
+2015-02-11  Natalia Portillo  <claunia@claunia.com>
+
+	* AppleEnums.cs:
+	* AppleStructs.cs:
+	* Claunia.IO.csproj:
+	  Added FinderInfo and FinderFlags for Apple systems.
+
+	* FileInfo.cs:
+	* DirectoryInfo.cs:
+	* FileSystemInfo.cs:
+	  Added FileSystemInfo class
+
 2015-02-08  Natalia Portillo  <claunia@claunia.com>
 
 	* FileInfo.cs:
