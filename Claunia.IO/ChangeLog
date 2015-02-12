@@ -1,6 +1,15 @@
 2015-02-12  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Tests/Interop.Linux.cs:
+	* Interop/Linux/Interop.Linux.uname.cs:
+	* Interop/Linux/Interop.Linux.Errors.cs:
+	* Interop/Linux/Interop.Linux.Libraries.cs:
+	  Added Linux libc, errno and uname.
+
+2015-02-12  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Tests/Interop.Apple.cs:
 	* Interop/Apple/Interop.Apple.uname.cs:
 	  Added code for uname() in OS X

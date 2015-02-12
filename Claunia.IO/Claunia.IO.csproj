@@ -49,6 +49,10 @@
     <Compile Include="Interop\Interop.PlatformID.cs" />
     <Compile Include="Tests\Interop.DetectOS.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.uname.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.Errors.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.Libraries.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.uname.cs" />
+    <Compile Include="Tests\Interop.Linux.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -61,5 +65,6 @@
     <Folder Include="Interop\" />
     <Folder Include="Interop\Apple\" />
     <Folder Include="Tests\" />
+    <Folder Include="Interop\Linux\" />
   </ItemGroup>
 </Project>
