@@ -36,7 +36,6 @@ namespace Tests
         [Test]
         public void TestStat()
         {
-            // Take care, Mono returns UNIX for Mac OS X
             if (Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.MacOSX || Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.iOS)
             {
                 string testFile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/.localized";
@@ -79,7 +78,6 @@ namespace Tests
         [Test]
         public void TestStat64()
         {
-            // Take care, Mono returns UNIX for Mac OS X
             if (Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.MacOSX || Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.iOS)
             {
                 string testFile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/.localized";
@@ -118,6 +116,23 @@ namespace Tests
                 Assert.AreEqual(0, stat.st_qspare[0]);
                 Assert.AreEqual(0, stat.st_qspare[1]);
 #pragma warning restore 618
+            }
+        }
+
+        [Test]
+        public void TestUname()
+        {
+            if (Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.MacOSX || Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.iOS)
+            {
+                Interop.Apple.utsname utsName;
+                int errno = Interop.Apple.uname(out utsName);
+
+                Assert.AreEqual(0, errno, "uname returned error {0}", (Interop.Apple.Errors)Marshal.GetLastWin32Error());
+                Assert.AreEqual("Darwin", utsName.sysname);
+                Assert.AreEqual("zeus.claunia.com", utsName.nodename);
+                Assert.AreEqual("14.0.0", utsName.release);
+                Assert.AreEqual("Darwin Kernel Version 14.0.0: Fri Sep 19 00:26:44 PDT 2014; root:xnu-2782.1.97~2/RELEASE_X86_64", utsName.version);
+                Assert.AreEqual("x86_64", utsName.machine);
             }
         }
     }

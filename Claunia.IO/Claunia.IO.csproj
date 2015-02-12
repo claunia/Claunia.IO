@@ -48,6 +48,7 @@
     <Compile Include="Interop\Interop.DetectOS.cs" />
     <Compile Include="Interop\Interop.PlatformID.cs" />
     <Compile Include="Tests\Interop.DetectOS.cs" />
+    <Compile Include="Interop\Apple\Interop.Apple.uname.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
