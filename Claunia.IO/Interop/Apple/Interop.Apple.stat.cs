@@ -31,9 +31,10 @@ internal static partial class Interop
     internal static partial class Apple
     {
         /// <summary>
-        /// stat(2) structure
+        /// stat(2) structure when __DARWIN_64_BIT_INO_T is defined
         /// </summary>
-        internal struct Stat
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Stat64
         {
             /// <summary>
             /// ID of device containing file
@@ -111,6 +112,112 @@ internal static partial class Interop
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
             public uint st_gen;
+            /// <summary>
+            /// Reserved: DO NOT USE
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            [Obsolete("RESERVED: DO NOT USE")]
+            public uint st_lspare;
+            /// <summary>
+            /// Reserved: DO NOT USE
+            /// </summary>
+            [MarshalAs(UnmanagedType.ByValArray, 
+                ArraySubType = UnmanagedType.U8, SizeConst = 2)]
+            [Obsolete("RESERVED: DO NOT USE")]
+            public ulong[] st_qspare;
+        }
+
+        /// <summary>
+        /// stat(2) structure when __DARWIN_64_BIT_INO_T is NOT defined
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Stat
+        {
+            /// <summary>
+            /// ID of device containing file
+            /// </summary>
+            [MarshalAs(UnmanagedType.I4)]
+            public int st_dev;
+            /// <summary>
+            /// File serial number
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            public uint st_ino;
+            /// <summary>
+            /// Mode of file
+            /// </summary>
+            [MarshalAs(UnmanagedType.U2)]
+            public mode_t st_mode;
+            /// <summary>
+            /// Number of hard links
+            /// </summary>
+            [MarshalAs(UnmanagedType.U2)]
+            public ushort st_nlink;
+            /// <summary>
+            /// User ID of the file
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            public uint st_uid;
+            /// <summary>
+            /// Group ID of the file
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            public uint st_gid;
+            /// <summary>
+            /// Device ID
+            /// </summary>
+            [MarshalAs(UnmanagedType.I4)]
+            public int st_rdev;
+            /// <summary>
+            /// time of last access
+            /// </summary>
+            public Timespec st_atimespec;
+            /// <summary>
+            /// time of last data modification
+            /// </summary>
+            public Timespec st_mtimespec;
+            /// <summary>
+            /// time of last status change
+            /// </summary>
+            public Timespec st_ctimespec;
+            /// <summary>
+            /// file size, in bytes
+            /// </summary>
+            [MarshalAs(UnmanagedType.I8)]
+            public long st_size;
+            /// <summary>
+            /// blocks allocated for file
+            /// </summary>
+            [MarshalAs(UnmanagedType.I8)]
+            public long st_blocks;
+            /// <summary>
+            /// optimal blocksize for I/O
+            /// </summary>
+            [MarshalAs(UnmanagedType.I4)]
+            public int st_blksize;
+            /// <summary>
+            /// user defined flags for file
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            public flags_t st_flags;
+            /// <summary>
+            /// file generation number
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            public uint st_gen;
+            /// <summary>
+            /// Reserved: DO NOT USE
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            [Obsolete("RESERVED: DO NOT USE")]
+            public uint st_lspare;
+            /// <summary>
+            /// Reserved: DO NOT USE
+            /// </summary>
+            [MarshalAs(UnmanagedType.ByValArray, 
+                ArraySubType = UnmanagedType.U8, SizeConst = 2)]
+            [Obsolete("RESERVED: DO NOT USE")]
+            public ulong[] st_qspare;
         }
 
         /// <summary>
@@ -326,7 +433,10 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Libc, SetLastError = true)]
-        static extern int stat(string path, out Stat buf);
+        public static extern int stat(string path, out Stat buf);
+
+        [DllImport(Libraries.Libc, SetLastError = true)]
+        public static extern int stat64(string path, out Stat64 buf);
     }
 }
 

@@ -29,6 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -40,15 +43,19 @@
     <Compile Include="Interop\Apple\Interop.Apple.stat.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.types.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.Libraries.cs" />
+    <Compile Include="Tests\Interop.Apple.cs" />
+    <Compile Include="Interop\Apple\Interop.Apple.Errors.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="..\LICENSE">
       <Link>LICENSE</Link>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interop\" />
     <Folder Include="Interop\Apple\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
 </Project>

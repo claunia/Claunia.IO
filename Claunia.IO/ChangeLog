@@ -1,5 +1,26 @@
 2015-02-12  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Apple/Interop.Apple.Errors.cs:
+	  Added all errors defined by BSD layer of OS X.
+
+	* Tests/Interop.Apple.cs:
+	  Added tests for Apple's stat() and stat64()
+
+	* packages.config:
+	  Added NUnit to do tests.
+
+	* Claunia.IO.csproj:
+	  Added tests
+
+	* Interop/Apple/Interop.Apple.stat.cs:
+	  Mono calls stat with 32-bit inode, modify structure and add
+	  stat64() call.
+
+	* Interop/Apple/Interop.Apple.types.cs:
+	  Pack structure, dunno if needed
+
+2015-02-12  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Apple/Interop.Apple.stat.cs:
 	* Interop/Apple/Interop.Apple.types.cs:

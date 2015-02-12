@@ -29,7 +29,7 @@ internal static partial class Interop
 {
     internal static partial class Apple
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack = 4)]
         internal struct Timespec
         {
             // TODO: Mono is 32-bit only on Mac OS X, but when it becomes 64-bit this will become int64
