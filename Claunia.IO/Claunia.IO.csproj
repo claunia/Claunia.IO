@@ -37,11 +37,18 @@
     <Compile Include="FileSystemInfo.cs" />
     <Compile Include="AppleEnums.cs" />
     <Compile Include="AppleStructs.cs" />
+    <Compile Include="Interop\Apple\Interop.Apple.stat.cs" />
+    <Compile Include="Interop\Apple\Interop.Apple.types.cs" />
+    <Compile Include="Interop\Apple\Interop.Apple.Libraries.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="..\LICENSE">
       <Link>LICENSE</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interop\" />
+    <Folder Include="Interop\Apple\" />
   </ItemGroup>
 </Project>

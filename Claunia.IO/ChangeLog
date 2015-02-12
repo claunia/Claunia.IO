@@ -1,3 +1,11 @@
+2015-02-12  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
+	* Interop/Apple/Interop.Apple.stat.cs:
+	* Interop/Apple/Interop.Apple.types.cs:
+	* Interop/Apple/Interop.Apple.Libraries.cs:
+	  Interoped OS X stat(2)
+
 2015-02-11  Natalia Portillo  <claunia@claunia.com>
 
 	* AppleEnums.cs:
