@@ -1,5 +1,14 @@
 2015-02-12  Natalia Portillo  <claunia@claunia.com>
 
+	* Claunia.IO.csproj:
+	* Tests/Interop.Apple.cs:
+	* Tests/Interop.DetectOS.cs:
+	* Interop/Interop.DetectOS.cs:
+	* Interop/Interop.PlatformID.cs:
+	  Added code to detect real OS platform.
+
+2015-02-12  Natalia Portillo  <claunia@claunia.com>
+
 	* Interop/Apple/Interop.Apple.Errors.cs:
 	  Added all errors defined by BSD layer of OS X.
 

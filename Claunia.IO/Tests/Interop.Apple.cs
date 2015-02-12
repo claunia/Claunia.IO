@@ -37,7 +37,7 @@ namespace Tests
         public void TestStat()
         {
             // Take care, Mono returns UNIX for Mac OS X
-            if (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
+            if (Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.MacOSX || Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.iOS)
             {
                 string testFile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/.localized";
 
@@ -80,7 +80,7 @@ namespace Tests
         public void TestStat64()
         {
             // Take care, Mono returns UNIX for Mac OS X
-            if (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
+            if (Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.MacOSX || Interop.DetectOS.GetRealPlatformID() == Interop.PlatformID.iOS)
             {
                 string testFile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/.localized";
 
