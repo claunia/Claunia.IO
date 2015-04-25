@@ -1,6 +1,11 @@
 2015-04-25  Natalia Portillo  <claunia@claunia.com>
 
 	* Interop/Apple/Interop.Apple.getattrlist.cs:
+	  Implemented Mac OS X setattrlist(2).
+
+2015-04-25  Natalia Portillo  <claunia@claunia.com>
+
+	* Interop/Apple/Interop.Apple.getattrlist.cs:
 	  Documents which platform function are we calling.
 
 	* Interop/Apple/Interop.Apple.stat.cs:

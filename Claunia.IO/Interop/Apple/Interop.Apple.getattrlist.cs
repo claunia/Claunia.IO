@@ -743,6 +743,18 @@ internal static partial class Interop
         /// <param name="options"><see cref="getAttrListOptions"/>.</param>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int getattrlist(string path, AttrList attrList, IntPtr attrBuf, UInt32 attrBufSize, UInt32 options);
+
+        /// <summary>
+        /// Sets the specified lists of attributes for the file system object.
+        /// Calls to system's setattrlist(2)
+        /// </summary>
+        /// <param name="path">Path to the file system object.</param>
+        /// <param name="attrList">List of attributes to set.</param>
+        /// <param name="attrBuf">Pointer to a buffer that store the attributes on it.</param>
+        /// <param name="attrBufSize">Allocated size of <paramref name="attrBuf"/>.</param>
+        /// <param name="options"><see cref="getAttrListOptions"/>.</param>
+        [DllImport(Libraries.Libc, SetLastError = true)]
+        public static extern int setattrlist(string path, AttrList attrList, IntPtr attrBuf, UInt32 attrBufSize, UInt32 options);
     }
 }
 
