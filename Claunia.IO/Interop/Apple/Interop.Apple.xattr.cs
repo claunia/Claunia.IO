@@ -74,6 +74,7 @@ internal static partial class Interop
 
         /// <summary>
         /// Gets an extended attribute value
+        /// Calls to system's getxattr(2)
         /// </summary>
         /// <param name="path">Path to the file.</param>
         /// <param name="name">Name of the extended attribute.</param>
@@ -87,6 +88,7 @@ internal static partial class Interop
 
         /// <summary>
         /// Sets an extended attribute value
+        /// Calls to system's setxattr(2)
         /// </summary>
         /// <param name="path">Path to the file.</param>
         /// <param name="name">Name of the extended attribute.</param>
@@ -100,6 +102,7 @@ internal static partial class Interop
 
         /// <summary>
         /// Removes an extended attribute
+        /// Calls to system's removexattr(2)
         /// </summary>
         /// <param name="path">Path to the file.</param>
         /// <param name="name">Name of the extended attribute.</param>
@@ -110,6 +113,7 @@ internal static partial class Interop
 
         /// <summary>
         /// Lists the extended attributes from a file
+        /// Calls to system's listxattr(2)
         /// </summary>
         /// <param name="path">Path to the file.</param>
         /// <param name="namebuf">Pointer to a buffer where an unordered list of null terminated UTF-8 strings wth the extended attributes names is to be stored.</param>
