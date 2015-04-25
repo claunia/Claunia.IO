@@ -72,6 +72,7 @@ internal static partial class Interop
         /// Calls to system's uname(3)
         /// </summary>
         /// <param name="name"><see cref="utsname"/>.</param>
+        /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport("libc", SetLastError = true)]
         internal static extern int uname(out utsname name);
     }

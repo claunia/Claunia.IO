@@ -1,5 +1,13 @@
 2015-04-25  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Apple/Interop.Apple.stat.cs:
+	* Interop/Linux/Interop.Linux.uname.cs:
+	* Interop/Apple/Interop.Apple.uname.cs:
+	* Interop/Apple/Interop.Apple.getattrlist.cs:
+	  Added return values to documentation.
+
+2015-04-25  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Apple/Interop.Apple.xattr.cs:
 	  Implemented Mac OS X getxattr(2), setxattr(2),

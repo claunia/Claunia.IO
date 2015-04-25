@@ -741,6 +741,7 @@ internal static partial class Interop
         /// <param name="attrBuf">Pointer to a buffer to store the attributes on it.</param>
         /// <param name="attrBufSize">Allocated size of <paramref name="attrBuf"/>.</param>
         /// <param name="options"><see cref="getAttrListOptions"/>.</param>
+        /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int getattrlist(string path, AttrList attrList, IntPtr attrBuf, UInt32 attrBufSize, UInt32 options);
 
@@ -753,6 +754,7 @@ internal static partial class Interop
         /// <param name="attrBuf">Pointer to a buffer that store the attributes on it.</param>
         /// <param name="attrBufSize">Allocated size of <paramref name="attrBuf"/>.</param>
         /// <param name="options"><see cref="getAttrListOptions"/>.</param>
+        /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int setattrlist(string path, AttrList attrList, IntPtr attrBuf, UInt32 attrBufSize, UInt32 options);
     }
