@@ -1,5 +1,17 @@
 2015-04-25  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Apple/Interop.Apple.getattrlist.cs:
+	  Documents which platform function are we calling.
+
+	* Interop/Apple/Interop.Apple.stat.cs:
+	  Documented stat and stat64
+
+	* Interop/Apple/Interop.Apple.uname.cs:
+	* Interop/Linux/Interop.Linux.uname.cs:
+	  Documented uname
+
+2015-04-25  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Apple/Interop.Apple.types.cs:
 	* Interop/Apple/Interop.Apple.getattrlist.cs:

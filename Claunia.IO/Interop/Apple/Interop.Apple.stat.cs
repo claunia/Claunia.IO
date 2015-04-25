@@ -432,9 +432,21 @@ internal static partial class Interop
             SF_SNAPSHOT = 0x00200000
         }
 
+        /// <summary>
+        /// Obtains information of the file pointed by <paramref name="path"/>.
+        /// Calls to system's stat(2)
+        /// </summary>
+        /// <param name="path">Path to the file.</param>
+        /// <param name="buf"><see cref="Stat"/> on 32 bit systems and <see cref="Stat64"/> on 64 bit systems.</param>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int stat(string path, out Stat buf);
 
+        /// <summary>
+        /// Obtains information of the file pointed by <paramref name="path"/>.
+        /// Calls to system's stat64(2)
+        /// </summary>
+        /// <param name="path">Path to the file.</param>
+        /// <param name="buf"><see cref="Stat64"/>.</param>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int stat64(string path, out Stat64 buf);
     }

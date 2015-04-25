@@ -734,6 +734,7 @@ internal static partial class Interop
 
         /// <summary>
         /// Gets the specified lists of attributes for the file system object.
+        /// Calls to system's getattrlist(2)
         /// </summary>
         /// <param name="path">Path to the file system object.</param>
         /// <param name="attrList">List of attributes to get.</param>

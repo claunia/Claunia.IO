@@ -63,6 +63,11 @@ internal static partial class Interop
             public string machine;
         }
 
+        /// <summary>
+        /// Gets system identification
+        /// Calls to system's uname(3)
+        /// </summary>
+        /// <param name="name"><see cref="utsname"/>.</param>
         [DllImport("libc", SetLastError = true)]
         internal static extern int uname(out utsname name);
     }
