@@ -98,7 +98,7 @@ internal static partial class Interop
         /// <param name="options"><see cref="xattrOptions"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int getxattr(string path, string name, IntPtr value, UInt32 size, UInt32 position, xattrOptions options);
+        public static extern int setxattr(string path, string name, IntPtr value, UInt32 size, UInt32 position, xattrOptions options);
 
         /// <summary>
         /// Removes an extended attribute

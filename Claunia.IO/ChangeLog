@@ -1,6 +1,11 @@
 2015-04-25  Natalia Portillo  <claunia@claunia.com>
 
 	* Interop/Apple/Interop.Apple.xattr.cs:
+	  Corrected typo.
+
+2015-04-25  Natalia Portillo  <claunia@claunia.com>
+
+	* Interop/Apple/Interop.Apple.xattr.cs:
 	  Added overlaying system calls.
 
 2015-04-25  Natalia Portillo  <claunia@claunia.com>
