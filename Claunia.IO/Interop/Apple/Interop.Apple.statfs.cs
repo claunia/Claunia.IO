@@ -221,20 +221,20 @@ internal static partial class Interop
         }
 
         /// <summary>
-        /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat(2)
+        /// Obtains information of the file system mounted at <paramref name="path"/>.
+        /// Calls to system's statfs(2)
         /// </summary>
-        /// <param name="path">Path to the file.</param>
+        /// <param name="path">Path to the filesystem mount point.</param>
         /// <param name="buf"><see cref="Stat"/> on 32 bit systems and <see cref="Stat64"/> on 64 bit systems.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int statfs(string path, out StatFS buf);
 
         /// <summary>
-        /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat64(2)
+        /// Obtains information of the file system mounted at <paramref name="path"/>.
+        /// Calls to system's statfs64(2)
         /// </summary>
-        /// <param name="path">Path to the file.</param>
+        /// <param name="path">Path to the filesystem mount point.</param>
         /// <param name="buf"><see cref="Stat64"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]

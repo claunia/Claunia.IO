@@ -1,5 +1,10 @@
 2015-04-26  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Apple/Interop.Apple.statfs.cs:
+	  Correct documentation.
+
+2015-04-26  Natalia Portillo  <claunia@claunia.com>
+
 	* Interop/Linux/Interop.Linux.uname.cs:
 	  Un-hardcode library name.
 
