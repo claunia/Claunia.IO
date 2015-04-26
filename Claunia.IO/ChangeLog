@@ -1,5 +1,12 @@
 2015-04-26  Natalia Portillo  <claunia@claunia.com>
 
+	* Claunia.IO.csproj:
+	* Interop/Linux/Interop.Linux.xattr.cs:
+	  Implement Linux's listxattr(2), getxattr(2), setxattr(2),
+	  removexattr(2)
+
+2015-04-26  Natalia Portillo  <claunia@claunia.com>
+
 	* Interop/Apple/Interop.Apple.statfs.cs:
 	  Correct documentation.
 

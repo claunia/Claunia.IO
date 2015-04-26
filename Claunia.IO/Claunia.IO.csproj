@@ -56,6 +56,7 @@
     <Compile Include="Interop\Apple\Interop.Apple.getattrlist.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.xattr.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.statfs.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.xattr.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
