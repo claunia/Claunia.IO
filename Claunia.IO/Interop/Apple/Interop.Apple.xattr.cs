@@ -30,7 +30,7 @@ internal static partial class Interop
 {
     internal static partial class Apple
     {
-        enum xattrOptions : int
+        public enum xattrOptions : int
         {
             /// <summary>
             /// Don't follow symbolic links
@@ -66,11 +66,11 @@ internal static partial class Interop
         /// <summary>
         /// Name for <see cref="Claunia.IO.FinderInfo"/> as a xattr
         /// </summary>
-        const int XATTR_FINDERINFO_NAME = "com.apple.FinderInfo";
+        const string XATTR_FINDERINFO_NAME = "com.apple.FinderInfo";
         /// <summary>
         /// Name for resource fork as a xattr
         /// </summary>
-        const int XATTR_RESOURCEFORK_NAME = "com.apple.ResourceFork";
+        const string XATTR_RESOURCEFORK_NAME = "com.apple.ResourceFork";
 
         /// <summary>
         /// Gets an extended attribute value
