@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System.Runtime.InteropServices;
+using System;
 
 internal static partial class Interop
 {
@@ -550,6 +551,15 @@ internal static partial class Interop
             /// Unknown or unspecified                  
             /// </summary>
             kTextEncodingUnknown = 0xFFFF
+        }
+
+        /// <summary>
+        /// File system ID type
+        /// </summary>
+        struct fsid_t
+        {
+            public Int32 val1;
+            public Int32 val2;
         }
     }
 }

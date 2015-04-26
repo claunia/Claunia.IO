@@ -1,3 +1,10 @@
+2015-04-26  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
+	* Interop/Apple/Interop.Apple.types.cs:
+	* Interop/Apple/Interop.Apple.statfs.cs:
+	  Implement statfs(2) and statfs64(2).
+
 2015-04-25  Natalia Portillo  <claunia@claunia.com>
 
 	* Interop/Apple/Interop.Apple.xattr.cs:
