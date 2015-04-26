@@ -73,7 +73,7 @@ internal static partial class Interop
         /// </summary>
         /// <param name="name"><see cref="utsname"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
-        [DllImport("libc", SetLastError = true)]
+        [DllImport(Libraries.Libc, SetLastError = true)]
         internal static extern int uname(out utsname name);
     }
 }
