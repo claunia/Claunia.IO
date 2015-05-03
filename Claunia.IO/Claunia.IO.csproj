@@ -59,6 +59,7 @@
     <Compile Include="Interop\Linux\Interop.Linux.xattr.cs" />
     <Compile Include="Interop\Linux\Interop.Linux.statfs.cs" />
     <Compile Include="Interop\Linux\Interop.Linux.types.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.stat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

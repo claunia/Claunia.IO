@@ -234,5 +234,18 @@ internal static partial class Interop
             /// </summary>
             ST_RELATIME = 0x1000
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Timespec
+        {
+            /// <summary>
+            /// Seconds
+            /// </summary>
+            public Int32 tv_sec;
+            /// <summary>
+            /// Nanoseconds
+            /// </summary>
+            public Int32 tv_nsec;
+        }
     }
 }
