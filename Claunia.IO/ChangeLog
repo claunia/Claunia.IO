@@ -1,6 +1,13 @@
 2015-05-03  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Interop/FreeBSD/Interop.FreeBSD.types.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.statfs.cs:
+	  Implement FreeBSD's statfs(2).
+
+2015-05-03  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Interop/FreeBSD/Interop.FreeBSD.stat.cs:
 	* Interop/FreeBSD/Interop.FreeBSD.types.cs:
 	  Implement FreeBSD's stat(2).
