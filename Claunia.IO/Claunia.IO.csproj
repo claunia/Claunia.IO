@@ -63,6 +63,8 @@
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.Errors.cs" />
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.Libraries.cs" />
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.uname.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.stat.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.types.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
