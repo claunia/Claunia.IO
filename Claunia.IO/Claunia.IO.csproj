@@ -60,6 +60,8 @@
     <Compile Include="Interop\Linux\Interop.Linux.statfs.cs" />
     <Compile Include="Interop\Linux\Interop.Linux.types.cs" />
     <Compile Include="Interop\Linux\Interop.Linux.stat.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.Errors.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.Libraries.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -73,5 +75,6 @@
     <Folder Include="Interop\Apple\" />
     <Folder Include="Tests\" />
     <Folder Include="Interop\Linux\" />
+    <Folder Include="Interop\FreeBSD\" />
   </ItemGroup>
 </Project>

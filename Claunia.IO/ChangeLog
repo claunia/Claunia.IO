@@ -1,6 +1,13 @@
 2015-05-03  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Interop/FreeBSD/Interop.FreeBSD.Errors.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.Libraries.cs:
+	  Add FreeBSD libc and errno.
+
+2015-05-03  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Interop/Linux/Interop.Linux.stat.cs:
 	* Interop/Linux/Interop.Linux.types.cs:
 	  Implemented Linux's stat(2).
