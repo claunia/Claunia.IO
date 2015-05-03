@@ -66,6 +66,7 @@
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.stat.cs" />
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.types.cs" />
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.statfs.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.extattr.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

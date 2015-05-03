@@ -1,6 +1,12 @@
 2015-05-03  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Interop/FreeBSD/Interop.FreeBSD.extattr.cs:
+	  Implemented FreeBSD's extattr(2).
+
+2015-05-03  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Interop/FreeBSD/Interop.FreeBSD.types.cs:
 	* Interop/FreeBSD/Interop.FreeBSD.statfs.cs:
 	  Implement FreeBSD's statfs(2).
