@@ -79,7 +79,7 @@ internal static partial class Interop
             /// <summary>
             /// Mount flags of filesystem (since Linux 2.6.36)
             /// </summary>
-            Int64 f_flags;
+            f_flags64_t f_flags;
             /// <summary>
             /// Padding bytes reserved for future use
             /// </summary>
@@ -137,7 +137,7 @@ internal static partial class Interop
             /// <summary>
             /// Mount flags of filesystem (since Linux 2.6.36)
             /// </summary>
-            Int32 f_flags;
+            f_flags_t f_flags;
             /// <summary>
             /// Padding bytes reserved for future use
             /// </summary>

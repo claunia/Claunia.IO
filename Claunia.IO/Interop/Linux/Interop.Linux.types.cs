@@ -138,5 +138,101 @@ internal static partial class Interop
             public Int32 val1;
             public Int32 val2;
         }
+
+        [Flags]
+        enum f_flags_t : Int32
+        {
+            /// <summary>
+            /// This filesystem is mounted read-only.
+            /// </summary>
+            ST_RDONLY = 0x0001,
+            /// <summary>
+            /// The set-user-ID and set-group-ID bits are ignored by exec(3) for executable files on this filesystem
+            /// </summary>
+            ST_NOSUID = 0x0002,
+            /// <summary>
+            /// Disallow access to device special files on this filesystem.
+            /// </summary>
+            ST_NODEV = 0x0004,
+            /// <summary>
+            /// Execution of programs is disallowed on this filesystem.
+            /// </summary>
+            ST_NOEXEC = 0x0008,
+            /// <summary>
+            /// Writes are synched to the filesystem immediately (see the description of O_SYNC in open(2)).
+            /// </summary>
+            ST_SYNCHRONOUS = 0x0010,
+            /// <summary>
+            /// f_flags support is implemented
+            /// </summary>
+            ST_VALID = 0x0020,
+            /// <summary>
+            /// Mandatory locking is permitted on the filesystem (see fcntl(2)).
+            /// </summary>
+            ST_MANDLOCK = 0x0040,
+            ST_WRITE = 0x0080,
+            ST_APPEND = 0x0100,
+            ST_IMMUTABLE = 0x0200,
+            /// <summary>
+            /// Do not update access times; see mount(2).
+            /// </summary>
+            ST_NOATIME = 0x0400,
+            /// <summary>
+            /// Do not update directory access times; see mount(2).
+            /// </summary>
+            ST_NODIRATIME = 0x0800,
+            /// <summary>
+            /// Update atime relative to mtime/ctime; see mount(2).
+            /// </summary>
+            ST_RELATIME = 0x1000
+        }
+
+        [Flags]
+        enum f_flags64_t : Int64
+        {
+            /// <summary>
+            /// This filesystem is mounted read-only.
+            /// </summary>
+            ST_RDONLY = 0x0001,
+            /// <summary>
+            /// The set-user-ID and set-group-ID bits are ignored by exec(3) for executable files on this filesystem
+            /// </summary>
+            ST_NOSUID = 0x0002,
+            /// <summary>
+            /// Disallow access to device special files on this filesystem.
+            /// </summary>
+            ST_NODEV = 0x0004,
+            /// <summary>
+            /// Execution of programs is disallowed on this filesystem.
+            /// </summary>
+            ST_NOEXEC = 0x0008,
+            /// <summary>
+            /// Writes are synched to the filesystem immediately (see the description of O_SYNC in open(2)).
+            /// </summary>
+            ST_SYNCHRONOUS = 0x0010,
+            /// <summary>
+            /// f_flags support is implemented
+            /// </summary>
+            ST_VALID = 0x0020,
+            /// <summary>
+            /// Mandatory locking is permitted on the filesystem (see fcntl(2)).
+            /// </summary>
+            ST_MANDLOCK = 0x0040,
+            ST_WRITE = 0x0080,
+            ST_APPEND = 0x0100,
+            ST_IMMUTABLE = 0x0200,
+            /// <summary>
+            /// Do not update access times; see mount(2).
+            /// </summary>
+            ST_NOATIME = 0x0400,
+            /// <summary>
+            /// Do not update directory access times; see mount(2).
+            /// </summary>
+            ST_NODIRATIME = 0x0800,
+            /// <summary>
+            /// Update atime relative to mtime/ctime; see mount(2).
+            /// </summary>
+            ST_RELATIME = 0x1000
+        }
     }
 }

@@ -1,5 +1,11 @@
 2015-05-03  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Linux/Interop.Linux.types.cs:
+	* Interop/Linux/Interop.Linux.statfs.cs:
+	  Add statfs(2) f_flags enumeration.
+
+2015-05-03  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Linux/Interop.Linux.types.cs:
 	* Interop/Linux/Interop.Linux.statfs.cs:
