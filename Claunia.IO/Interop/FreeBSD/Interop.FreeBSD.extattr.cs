@@ -57,7 +57,7 @@ internal static partial class Interop
         /// <param name="data">Pointer to buffer where to store the data.</param>
         /// <param name="nbytes">Size of the buffer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        Int64 extattr_get_file(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int64 nbytes);
+        public static extern Int64 extattr_get_file(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int64 nbytes);
 
         /// <summary>
         /// Sets an extended attribute value
@@ -70,7 +70,7 @@ internal static partial class Interop
         /// <param name="data">Pointer where the data is stored.</param>
         /// <param name="nbytes">Size of the data.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        Int64 extattr_set_file(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int64 nbytes);
+        public static extern Int64 extattr_set_file(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int64 nbytes);
 
         /// <summary>
         /// Deletes an extended attribute value
@@ -83,7 +83,7 @@ internal static partial class Interop
         /// <param name="data">Pointer to buffer where the data is stored.</param>
         /// <param name="nbytes">Size of the pointer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        Int64 extattr_delete_file(string path, attrNamespace attrnamespace, string attrname);
+        public static extern Int64 extattr_delete_file(string path, attrNamespace attrnamespace, string attrname);
 
         /// <summary>
         /// Gets a list of extended attributes that the file has in that namespace
@@ -98,7 +98,7 @@ internal static partial class Interop
         /// <param name="data">Pointer to buffer where to store the list.</param>
         /// <param name="nbytes">Size of the buffer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        Int64 extattr_list_file(string path, attrNamespace attrnamespace, IntPtr data, Int64 nbytes);
+        public static extern Int64 extattr_list_file(string path, attrNamespace attrnamespace, IntPtr data, Int64 nbytes);
 
         /// <summary>
         /// Gets an extended attribute value
@@ -112,7 +112,7 @@ internal static partial class Interop
         /// <param name="data">Pointer to buffer where to store the data.</param>
         /// <param name="nbytes">Size of the buffer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_get_file")]
-        Int32 extattr_get_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int32 nbytes);
+        public static extern Int32 extattr_get_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int32 nbytes);
 
         /// <summary>
         /// Sets an extended attribute value
@@ -126,7 +126,7 @@ internal static partial class Interop
         /// <param name="data">Pointer where the data is stored.</param>
         /// <param name="nbytes">Size of the data.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_set_file")]
-        Int32 extattr_set_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int32 nbytes);
+        public static extern Int32 extattr_set_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int32 nbytes);
 
         /// <summary>
         /// Deletes an extended attribute value
@@ -140,7 +140,7 @@ internal static partial class Interop
         /// <param name="data">Pointer to buffer where the data is stored.</param>
         /// <param name="nbytes">Size of the pointer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_delete_file")]
-        Int32 extattr_delete_file32(string path, attrNamespace attrnamespace, string attrname);
+        public static extern Int32 extattr_delete_file32(string path, attrNamespace attrnamespace, string attrname);
 
         /// <summary>
         /// Gets a list of extended attributes that the file has in that namespace
@@ -156,7 +156,7 @@ internal static partial class Interop
         /// <param name="data">Pointer to buffer where to store the list.</param>
         /// <param name="nbytes">Size of the buffer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_list_file")]
-        Int32 extattr_list_file32(string path, attrNamespace attrnamespace, IntPtr data, Int32 nbytes);
+        public static extern Int32 extattr_list_file32(string path, attrNamespace attrnamespace, IntPtr data, Int32 nbytes);
     }
 }
 

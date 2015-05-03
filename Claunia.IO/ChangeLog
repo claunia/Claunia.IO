@@ -1,5 +1,10 @@
 2015-05-03  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/FreeBSD/Interop.FreeBSD.extattr.cs:
+	  Correct extern declarations.
+
+2015-05-03  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/FreeBSD/Interop.FreeBSD.extattr.cs:
 	  Implemented FreeBSD's extattr(2).
