@@ -1,5 +1,10 @@
 2015-05-03  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Linux/Interop.Linux.stat.cs:
+	  Manpages are in octal, corrected typo.
+
+2015-05-03  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/FreeBSD/Interop.FreeBSD.uname.cs:
 	  Implement FreeBSD's uname(3)

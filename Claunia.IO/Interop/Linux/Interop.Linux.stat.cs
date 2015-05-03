@@ -191,91 +191,91 @@ internal static partial class Interop
             /// <summary>
             ///    bit mask for the file type bit fields
             /// </summary>
-            S_IFMT = 0x0170000,
+            S_IFMT = 0xF000,
             /// <summary>
             /// socket
             /// </summary>
-            S_IFSOCK = 0x0140000,
+            S_IFSOCK = 0xC000,
             /// <summary>
             /// symbolic link
             /// </summary>
-            S_IFLNK = 0x0120000,
+            S_IFLNK = 0xA000,
             /// <summary>
             /// regular file
             /// </summary>
-            S_IFREG = 0x0100000,
+            S_IFREG = 0x8000,
             /// <summary>
             /// block device
             /// </summary>
-            S_IFBLK = 0x0060000,
+            S_IFBLK = 0x6000,
             /// <summary>
             /// directory
             /// </summary>
-            S_IFDIR = 0x0040000,
+            S_IFDIR = 0x4000,
             /// <summary>
             /// character device
             /// </summary>
-            S_IFCHR = 0x0020000,
+            S_IFCHR = 0x2000,
             /// <summary>
             /// FIFO
             /// </summary>
-            S_IFIFO = 0x0010000,
+            S_IFIFO = 0x1000,
             /// <summary>
             /// set-user-ID bit
             /// </summary>
-            S_ISUID = 0x0004000,
+            S_ISUID = 0x0800,
             /// <summary>
             /// set-group-ID bit
             /// </summary>
-            S_ISGID = 0x0002000,
+            S_ISGID = 0x0400,
             /// <summary>
             /// sticky bit (see below)
             /// </summary>
-            S_ISVTX = 0x0001000,
+            S_ISVTX = 0x0200,
             /// <summary>
             /// mask for file owner permissions
             /// </summary>
-            S_IRWXU = 0x00700,
+            S_IRWXU = 0x01C0,
             /// <summary>
             /// owner has read permission
             /// </summary>
-            S_IRUSR = 0x00400,
+            S_IRUSR = 0x0100,
             /// <summary>
             /// owner has write permission
             /// </summary>
-            S_IWUSR = 0x00200,
+            S_IWUSR = 0x0080,
             /// <summary>
             /// owner has execute permission
             /// </summary>
-            S_IXUSR = 0x00100,
+            S_IXUSR = 0x0040,
             /// <summary>
             /// mask for group permissions
             /// </summary>
-            S_IRWXG = 0x00070,
+            S_IRWXG = 0x0038,
             /// <summary>
             /// group has read permission
             /// </summary>
-            S_IRGRP = 0x00040,
+            S_IRGRP = 0x0020,
             /// <summary>
             /// group has write permission
             /// </summary>
-            S_IWGRP = 0x00020,
+            S_IWGRP = 0x0010,
             /// <summary>
             /// group has execute permission
             /// </summary>
-            S_IXGRP = 0x00010,
+            S_IXGRP = 0x0008,
             /// <summary>
             /// mask for permissions for others (not in group)
             /// </summary>
-            S_IRWXO = 0x00007,
+            S_IRWXO = 0x0007,
             /// <summary>
             /// others have read permission
             /// </summary>
-            S_IROTH = 0x00004,
+            S_IROTH = 0x0004,
             /// <summary>
             /// others have write permission
             /// </summary>
-            S_IWOTH = 0x00002,
+            S_IWOTH = 0x002,
             /// <summary>
             /// others have execute permission
             /// </summary>
