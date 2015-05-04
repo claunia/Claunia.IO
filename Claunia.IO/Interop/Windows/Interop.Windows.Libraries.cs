@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Linux.Libraries.cs
+// Interop.Windows.Libraries.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>

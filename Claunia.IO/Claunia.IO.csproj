@@ -69,6 +69,7 @@
     <Compile Include="Interop\FreeBSD\Interop.FreeBSD.extattr.cs" />
     <Compile Include="Interop\Windows\Interop.Windows.Libraries.cs" />
     <Compile Include="Interop\Windows\Interop.Windows.Errors.cs" />
+    <Compile Include="Interop\Windows\Interop.Windows.EAs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

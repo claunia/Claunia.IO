@@ -1,6 +1,16 @@
 2015-05-04  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Interop/Windows/Interop.Windows.EAs.cs:
+	  Implement callings for Extended Attributes on NT.
+
+	* Interop/Windows/Interop.Windows.Errors.cs:
+	* Interop/Windows/Interop.Windows.Libraries.cs:
+	  Typo.
+
+2015-05-04  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Interop/Windows/Interop.Windows.Errors.cs:
 	* Interop/Windows/Interop.Windows.Libraries.cs:
 	  Added Windows NT libraries and errors.

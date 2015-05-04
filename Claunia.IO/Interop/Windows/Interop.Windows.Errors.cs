@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Windows.types.cs
+// Interop.Windows.Errors.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -30,7 +30,7 @@ internal static partial class Interop
 {
     internal static partial class Windows
     {
-        enum NTSTATUS : UInt32
+        public enum NTSTATUS : UInt32
         {
             /// <summary>
             /// The operation completed successfully.
