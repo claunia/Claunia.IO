@@ -113,8 +113,9 @@ internal static partial class Interop
         [DllImport(Libraries.NTDLL)]
         public static extern NTSTATUS NtQueryEaFile(IntPtr FileHandle,
                                                     ref IO_STATUS_BLOCK IoStatusBlock, IntPtr Buffer, ulong Length,
-                                                    bool ReturnSingleEntry, IntPtr EaList, UInt32 EaListLength, ref UInt32 EaIndex,
+                                                    [MarshalAs(UnmanagedType.Bool)] bool ReturnSingleEntry, IntPtr EaList, UInt32 EaListLength, ref UInt32 EaIndex,
                                                     UInt32 RestartScan);
+
         /// <summary>
         /// Sets extended-attribute (EA) values for a file.
         /// </summary>

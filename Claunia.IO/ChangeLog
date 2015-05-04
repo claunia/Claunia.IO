@@ -1,6 +1,17 @@
 2015-05-04  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Interop/Windows/Interop.Windows.Backup.cs:
+	  Added backup functions that allow to access ADSs and EAs on
+	  any Windows NT version.
+
+	* Interop/Windows/Interop.Windows.EAs.cs:
+	* Interop/Windows/Interop.Windows.Files.cs:
+	  Code enhancement.
+
+2015-05-04  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Interop/Windows/Interop.Windows.Streams.cs:
 	  Added Windows Server 2003 onward functions to search for
 	  alternate data streams.

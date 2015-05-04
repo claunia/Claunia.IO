@@ -184,7 +184,7 @@ internal static partial class Interop
         public static extern NTSTATUS NtCreateFile(out SafeFileHandle FileHandle,
                                                    ACCESS_MASK DesiredAccess, ref OBJECT_ATTRIBUTES ObjectAttributes,
                                                    ref IO_STATUS_BLOCK IoStatusBlock, ref long AllocationSize, uint FileAttributes,
-                                                   System.IO.FileShare ShareAccess, CreateDispositionFlags CreateDisposition, CreateOptionsFlags CreateOptions,
+                                                   FileShare ShareAccess, CreateDispositionFlags CreateDisposition, CreateOptionsFlags CreateOptions,
                                                    IntPtr EaBuffer, uint EaLength);
 
         /// <summary>
