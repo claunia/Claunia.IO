@@ -30,6 +30,7 @@ internal static partial class Interop
         static class Libraries
         {
             internal const string NTDLL = "ntdll.dll";
+            internal const string Kernel32 = "kernel32.dll";
         }
     }
 }

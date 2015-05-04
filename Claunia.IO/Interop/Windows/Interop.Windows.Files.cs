@@ -26,6 +26,7 @@
 using System.Runtime.InteropServices;
 using System;
 using Microsoft.Win32.SafeHandles;
+using System.IO;
 
 internal static partial class Interop
 {
@@ -193,6 +194,26 @@ internal static partial class Interop
         /// <param name="handle">Handle to an object of any type.</param>
         [DllImport(Libraries.NTDLL)]
         public static extern NTSTATUS NtClose(SafeFileHandle handle);
+
+        /// <summary>
+        /// Creates or opens a file or I/O device. The most commonly used I/O devices are as follows: file, file stream, directory, physical disk, volume, console buffer, tape drive, communications resource, mailslot, and pipe. The function returns a handle that can be used to access the file or device for various types of I/O depending on the file or device and the flags and attributes specified.
+        /// </summary>
+        /// <returns>
+        /// If the function succeeds, the return value is an open handle to the specified file, device, named pipe, or mail slot.
+        /// If the function fails, <see cref="SafeFileHandle.IsInvalid"/> is set.
+        /// </returns>
+        /// <param name="lpFileName">The name of the file or device to be created or opened. You may use either forward slashes (/) or backslashes (\) in this name.</param>
+        /// <param name="dwDesiredAccess">The requested access to the file or device, which can be summarized as read, write, both or neither (zero).</param>
+        /// <param name="dwShareMode">The requested sharing mode of the file or device, which can be read, write, both, delete, all of these, or none (refer to the following table). Access requests to attributes or extended attributes are not affected by this flag.</param>
+        /// <param name="lpSecurityAttributes">A pointer to a SECURITY_ATTRIBUTES structure that contains two separate but related data members: an optional security descriptor, and a Boolean value that determines whether the returned handle can be inherited by child processes. This parameter can be <c>null</c>.</param>
+        /// <param name="dwCreationDisposition">An action to take on a file or device that exists or does not exist.</param>
+        /// <param name="dwFlagsAndAttributes">The file or device attributes and flags.</param>
+        /// <param name="hTemplateFile">A valid handle to a template file with the GENERIC_READ access right. The template file supplies file attributes and extended attributes for the file that is being created. This parameter can be <c>null</c>.</param>
+        [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern SafeFileHandle CreateFile(string lpFileName,
+            FileAccess dwDesiredAccess, FileShare dwShareMode,
+            IntPtr lpSecurityAttributes, FileMode dwCreationDisposition,
+            int dwFlagsAndAttributes, IntPtr hTemplateFile);
     }
 }
 

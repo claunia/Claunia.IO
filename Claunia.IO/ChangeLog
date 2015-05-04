@@ -1,5 +1,11 @@
 2015-05-04  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Windows/Interop.Windows.Files.cs:
+	* Interop/Windows/Interop.Windows.Libraries.cs:
+	  Added kernel32's CreateFile().
+
+2015-05-04  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Windows/Interop.Windows.Files.cs:
 	* Interop/Windows/Interop.Windows.types.cs:
