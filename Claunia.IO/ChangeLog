@@ -1,5 +1,12 @@
 2015-05-04  Natalia Portillo  <claunia@claunia.com>
 
+	* Claunia.IO.csproj:
+	* Interop/Windows/Interop.Windows.Streams.cs:
+	  Added Windows Server 2003 onward functions to search for
+	  alternate data streams.
+
+2015-05-04  Natalia Portillo  <claunia@claunia.com>
+
 	* Interop/Windows/Interop.Windows.Files.cs:
 	* Interop/Windows/Interop.Windows.Libraries.cs:
 	  Added kernel32's CreateFile().
