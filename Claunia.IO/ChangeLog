@@ -1,6 +1,14 @@
 2015-05-04  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	* Interop/Windows/Interop.Windows.Files.cs:
+	* Interop/Windows/Interop.Windows.types.cs:
+	  Implemented NtCreateFile() calling to get file handles and
+	  NtClose() to dispose of them.
+
+2015-05-04  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	* Interop/Windows/Interop.Windows.EAs.cs:
 	  Implement callings for Extended Attributes on NT.
 

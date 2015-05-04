@@ -70,6 +70,8 @@
     <Compile Include="Interop\Windows\Interop.Windows.Libraries.cs" />
     <Compile Include="Interop\Windows\Interop.Windows.Errors.cs" />
     <Compile Include="Interop\Windows\Interop.Windows.EAs.cs" />
+    <Compile Include="Interop\Windows\Interop.Windows.types.cs" />
+    <Compile Include="Interop\Windows\Interop.Windows.Files.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
