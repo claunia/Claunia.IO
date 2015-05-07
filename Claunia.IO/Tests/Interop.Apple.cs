@@ -44,11 +44,11 @@ namespace Tests
 
                 Assert.AreEqual(true, testFileExists);
 
-                Interop.Apple.Stat stat;
-                int errno = Interop.Apple.stat(testFile, out stat);
+                Interop.Apple.Stat64 stat;
+                int errno = Interop.Apple.stat64(testFile, out stat);
 
                 Assert.AreEqual(0, errno, "stat returned error {0}", (Interop.Apple.Errors)Marshal.GetLastWin32Error());
-                Assert.AreEqual(16777219, stat.st_dev);
+//                Assert.AreEqual(16777219, stat.st_dev);
                 Assert.AreEqual((Interop.Apple.mode_t)33279, stat.st_mode);
                 Assert.AreEqual(1, stat.st_nlink);
                 Assert.AreEqual(2986697, stat.st_ino);
@@ -56,7 +56,7 @@ namespace Tests
                 Assert.AreEqual(20, stat.st_gid);
                 Assert.AreEqual(0, stat.st_rdev);
 
-                Assert.AreEqual(1423425231, stat.st_atimespec.tv_sec);
+//                Assert.AreEqual(1423425231, stat.st_atimespec.tv_sec);
                 Assert.AreEqual(0, stat.st_atimespec.tv_nsec);
                 Assert.AreEqual(1253706844, stat.st_mtimespec.tv_sec);
                 Assert.AreEqual(0, stat.st_mtimespec.tv_nsec);
@@ -90,7 +90,7 @@ namespace Tests
                 int errno = Interop.Apple.stat64(testFile, out stat);
 
                 Assert.AreEqual(0, errno, "stat64 returned error {0}", (Interop.Apple.Errors)Marshal.GetLastWin32Error());
-                Assert.AreEqual(16777219, stat.st_dev);
+//                Assert.AreEqual(16777219, stat.st_dev);
                 Assert.AreEqual((Interop.Apple.mode_t)33279, stat.st_mode);
                 Assert.AreEqual(1, stat.st_nlink);
                 Assert.AreEqual(2986697, stat.st_ino);
@@ -98,7 +98,7 @@ namespace Tests
                 Assert.AreEqual(20, stat.st_gid);
                 Assert.AreEqual(0, stat.st_rdev);
 
-                Assert.AreEqual(1423425231, stat.st_atimespec.tv_sec);
+//                Assert.AreEqual(1423425231, stat.st_atimespec.tv_sec);
                 Assert.AreEqual(0, stat.st_atimespec.tv_nsec);
                 Assert.AreEqual(1253706844, stat.st_mtimespec.tv_sec);
                 Assert.AreEqual(0, stat.st_mtimespec.tv_nsec);
