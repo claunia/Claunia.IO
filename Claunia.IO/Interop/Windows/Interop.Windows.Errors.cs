@@ -23,8 +23,36 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+
+#region Win32 type definitions
+using BOOL = System.Boolean;
+using BOOLEAN = System.Boolean;
+using CCHAR = System.SByte;
+using CHAR = System.Byte;
+using DWORD = System.UInt32;
+using FILE_ID_128 = System.Guid;
+using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LARGE_INTEGER = System.Int64;
+using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
+using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
+using UCHAR = System.Byte;
+using ULONG = System.UInt32;
+using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
+using WCHAR = System.String;
+using WORD = System.UInt16;
+
+#endregion
 
 internal static partial class Interop
 {

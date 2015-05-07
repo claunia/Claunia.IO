@@ -23,9 +23,38 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+
+#region Win32 type definitions
+using BOOL = System.Boolean;
+using BOOLEAN = System.Boolean;
+using CCHAR = System.SByte;
+using CHAR = System.Byte;
+using DWORD = System.UInt32;
+using FILE_ID_128 = System.Guid;
+using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LARGE_INTEGER = System.Int64;
+using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
+using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
+using UCHAR = System.Byte;
+using ULONG = System.UInt32;
+using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
+using WCHAR = System.String;
+using WORD = System.UInt16;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -34,7 +63,7 @@ internal static partial class Interop
         /// <summary>
         /// Type of data on alternate stream.
         /// </summary>
-        public enum StreamType
+        public enum StreamType : DWORD
         {
             /// <summary>
             /// Standard data. This corresponds to the NTFS $DATA stream type on the default (unnamed) data stream.
@@ -79,7 +108,7 @@ internal static partial class Interop
         }
 
         [Flags]
-        public enum StreamAttributes
+        public enum StreamAttributes : DWORD
         {
             /// <summary>
             /// Normal attribute
@@ -110,19 +139,19 @@ internal static partial class Interop
             /// <summary>
             /// Attributes of data to facilitate cross-operating system transfer.
             /// </summary>
-            public int dwStreamAttributes;
+            public StreamAttributes dwStreamAttributes;
             /// <summary>
             /// Size of data, in bytes.
             /// </summary>
-            public long Size;
+            public LARGE_INTEGER Size;
             /// <summary>
             /// Length of the name of the alternative data stream, in bytes.
             /// </summary>
-            public int dwStreamNameSize;
+            public DWORD dwStreamNameSize;
             /// <summary>
             /// Unicode string that specifies the name of the alternative data stream.
             /// </summary>
-            public string cStreamName;
+            public WCHAR cStreamName;
         }
 
         /// <summary>
@@ -141,11 +170,11 @@ internal static partial class Interop
         /// To release the memory used by the data structure, call BackupRead with the <paramref name="bAbort"/> parameter set to <c>true</c> when the backup operation is complete.</param>
         [DllImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool BackupRead(SafeFileHandle hFile, IntPtr lpBuffer,
-                                             uint nNumberOfBytesToRead, out uint lpNumberOfBytesRead,
-                                             [MarshalAs(UnmanagedType.Bool)] bool bAbort,
-                                             [MarshalAs(UnmanagedType.Bool)] bool bProcessSecurity,
-                                             ref IntPtr lpContext);
+        public static extern bool BackupRead(HANDLE hFile, LPBYTE lpBuffer,
+                                             DWORD nNumberOfBytesToRead, out LPDWORD lpNumberOfBytesRead,
+                                             [MarshalAs(UnmanagedType.Bool)] BOOL bAbort,
+                                             [MarshalAs(UnmanagedType.Bool)] BOOL bProcessSecurity,
+                                             ref LPVOID lpContext);
 
         /// <summary>
         /// The BackupSeek function seeks forward in a data stream initially accessed by using the <see cref="BackupRead"/> or <see cref="BackupWrite"/> function.
@@ -159,8 +188,8 @@ internal static partial class Interop
         /// <param name="lpContext">Pointer to an internal data structure used by the function. This structure must be the same structure that was initialized by the <see cref="BackupRead"/> or <see cref="BackupWrite"/> function. An application must not touch the contents of this structure.</param>
         [DllImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool BackupSeek(SafeFileHandle hFile,
-                                             uint dwLowBytesToSeek, uint dwHighBytesToSeek, out uint lpdwLowByteSeeked,
-                                             out uint lpdwHighByteSeeked, ref IntPtr lpContext);
+        public static extern bool BackupSeek(HANDLE hFile,
+                                             DWORD dwLowBytesToSeek, DWORD dwHighBytesToSeek, out LPDWORD lpdwLowByteSeeked,
+                                             out LPDWORD lpdwHighByteSeeked, ref LPVOID lpContext);
     }
 }

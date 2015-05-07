@@ -23,16 +23,38 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
-using Microsoft.Win32.SafeHandles;
 using System.IO;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 #region Win32 type definitions
 using BOOL = System.Boolean;
+using BOOLEAN = System.Boolean;
+using CCHAR = System.SByte;
+using CHAR = System.Byte;
 using DWORD = System.UInt32;
+using FILE_ID_128 = System.Guid;
 using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LARGE_INTEGER = System.Int64;
+using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
 using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
+using UCHAR = System.Byte;
+using ULONG = System.UInt32;
+using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
+using WCHAR = System.String;
+using WORD = System.UInt16;
+
 #endregion
 
 internal static partial class Interop
@@ -40,7 +62,7 @@ internal static partial class Interop
     internal static partial class Windows
     {
 
-        public enum CreateDispositionFlags : uint
+        public enum CreateDispositionFlags : ULONG
         {
             /// <summary>
             /// Replaces the file if it exists.
@@ -70,7 +92,7 @@ internal static partial class Interop
             FILE_MAXIMUM_DISPOSITION = FILE_OVERWRITE_IF
         }
 
-        public enum CreateOptionsFlags : uint
+        public enum CreateOptionsFlags : ULONG
         {
             /// <summary>
             /// The file is a directory.
@@ -188,11 +210,11 @@ internal static partial class Interop
         /// <param name="EaBuffer">Pointer to a <see cref="FILE_FULL_EA_INFORMATION"/>-structured buffer that contains the starting attributes to write to the file when creating, replacing or overwriting it.</param>
         /// <param name="EaLength">Length of the buffer pointed by <paramref name="EaBuffer"/></param>
         [DllImport(Libraries.NTDLL)]
-        public static extern NTSTATUS NtCreateFile(out SafeFileHandle FileHandle,
+        public static extern NTSTATUS NtCreateFile(out PHANDLE FileHandle,
                                                    ACCESS_MASK DesiredAccess, ref OBJECT_ATTRIBUTES ObjectAttributes,
-                                                   ref IO_STATUS_BLOCK IoStatusBlock, ref long AllocationSize, uint FileAttributes,
+                                                   ref IO_STATUS_BLOCK IoStatusBlock, ref PLARGE_INTEGER AllocationSize, ULONG FileAttributes,
                                                    FileShare ShareAccess, CreateDispositionFlags CreateDisposition, CreateOptionsFlags CreateOptions,
-                                                   IntPtr EaBuffer, uint EaLength);
+                                                   PVOID EaBuffer, ULONG EaLength);
 
         /// <summary>
         /// Closes an object handle
@@ -200,7 +222,7 @@ internal static partial class Interop
         /// <returns>returns <see cref="NTSTATUS.STATUS_SUCCESS"/> on success, or the appropriate <see cref="NTSTATUS"/> error code on failure. In particular, it returns <see cref="NTSTATUS.STATUS_INVALID_HANDLE"/> if Handle is not a valid handle, or <see cref="NTSTATUS.STATUS_HANDLE_NOT_CLOSABLE"/> if the calling thread does not have permission to close the handle.</returns>
         /// <param name="handle">Handle to an object of any type.</param>
         [DllImport(Libraries.NTDLL)]
-        public static extern NTSTATUS NtClose(SafeFileHandle handle);
+        public static extern NTSTATUS NtClose(HANDLE handle);
 
         /// <summary>
         /// Creates or opens a file or I/O device. The most commonly used I/O devices are as follows: file, file stream, directory, physical disk, volume, console buffer, tape drive, communications resource, mailslot, and pipe. The function returns a handle that can be used to access the file or device for various types of I/O depending on the file or device and the flags and attributes specified.
@@ -217,62 +239,63 @@ internal static partial class Interop
         /// <param name="dwFlagsAndAttributes">The file or device attributes and flags.</param>
         /// <param name="hTemplateFile">A valid handle to a template file with the GENERIC_READ access right. The template file supplies file attributes and extended attributes for the file that is being created. This parameter can be <c>null</c>.</param>
         [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern SafeFileHandle CreateFile(string lpFileName,
-            FileAccess dwDesiredAccess, FileShare dwShareMode,
-            IntPtr lpSecurityAttributes, FileMode dwCreationDisposition,
-            int dwFlagsAndAttributes, IntPtr hTemplateFile);
+        public static extern HANDLE CreateFile(LPCTSTR lpFileName,
+                                               FileAccess dwDesiredAccess, FileShare dwShareMode,
+                                               IntPtr lpSecurityAttributes, FileMode dwCreationDisposition,
+                                               DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
 
-        public enum FILE_INFO_BY_HANDLE_CLASS { 
+        public enum FILE_INFO_BY_HANDLE_CLASS
+        {
             /// <summary>
             /// Minimal information for the file should be retrieved or set.
             /// <see cref="FILE_BASIC_INFO"/> 
             /// </summary>
-            FileBasicInfo                   = 0,
+            FileBasicInfo = 0,
             /// <summary>
             /// Extended information for the file should be retrieved.
             /// <see cref="FILE_STANDARD_INFO"/> 
             /// </summary>
-            FileStandardInfo                = 1,
+            FileStandardInfo = 1,
             /// <summary>
             /// The file name should be retrieved.
             /// <see cref="FILE_NAME_INFO"/> 
             /// </summary>
-            FileNameInfo                    = 2,
+            FileNameInfo = 2,
             /// <summary>
             /// The file name should be changed.
             /// <see cref="FILE_RENAME_INFO"/> 
             /// </summary>
-            FileRenameInfo                  = 3,
+            FileRenameInfo = 3,
             /// <summary>
             /// The file should be deleted.
             /// <see cref="FILE_DISPOSITION_INFO"/> 
             /// </summary>
-            FileDispositionInfo             = 4,
+            FileDispositionInfo = 4,
             /// <summary>
             /// The file allocation information should be changed.
             /// <see cref="FILE_ALLOCATION_INFO"/> 
             /// </summary>
-            FileAllocationInfo              = 5,
+            FileAllocationInfo = 5,
             /// <summary>
             /// The end of the file should be set.
             /// <see cref="FILE_END_OF_FILE_INFO"/> 
             /// </summary>
-            FileEndOfFileInfo               = 6,
+            FileEndOfFileInfo = 6,
             /// <summary>
             /// File stream information for the specified file should be retrieved.
             /// <see cref="FILE_STREAM_INFO"/> 
             /// </summary>
-            FileStreamInfo                  = 7,
+            FileStreamInfo = 7,
             /// <summary>
             /// File compression information should be retrieved.
             /// <see cref="FILE_COMPRESSION_INFO"/> 
             /// </summary>
-            FileCompressionInfo             = 8,
+            FileCompressionInfo = 8,
             /// <summary>
             /// File attribute information should be retrieved.
             /// <see cref="FILE_ATTRIBUTE_TAG_INFO"/> 
             /// </summary>
-            FileAttributeTagInfo            = 9,
+            FileAttributeTagInfo = 9,
             /// <summary>
             /// Files in the specified directory should be retrieved. Used for directory handles.
             /// Use only when calling GetFileInformationByHandleEx.
@@ -282,64 +305,64 @@ internal static partial class Interop
             /// enumeration operation after the last file is returned.
             /// <see cref="FILE_ID_BOTH_DIR_INFO"/> 
             /// </summary>
-            FileIdBothDirectoryInfo         = 10,
+            FileIdBothDirectoryInfo = 10,
             /// <summary>
             /// Identical to <see cref="FileIdBothDirectoryInfo"/>, but forces the enumeration operation to start again from the beginning.
             /// <see cref="FILE_ID_BOTH_DIR_INFO"/> 
             /// </summary>
-            FileIdBothDirectoryRestartInfo  = 11,
+            FileIdBothDirectoryRestartInfo = 11,
             /// <summary>
             /// Priority hint information should be set.
             /// <see cref="FILE_IO_PRIORITY_HINT_INFO"/> 
             /// </summary>
-            FileIoPriorityHintInfo          = 12,
+            FileIoPriorityHintInfo = 12,
             /// <summary>
             /// File remote protocol information should be retrieved.
             /// <see cref="FILE_REMOTE_PROTOCOL_INFO"/> 
             /// </summary>
-            FileRemoteProtocolInfo          = 13,
+            FileRemoteProtocolInfo = 13,
             /// <summary>
             /// Files in the specified directory should be retrieved.
             /// <see cref="FILE_FULL_DIR_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileFullDirectoryInfo           = 14,
+            FileFullDirectoryInfo = 14,
             /// <summary>
             /// Identical to FileFullDirectoryInfo, but forces the enumeration operation to start again from the beginning.
             /// <see cref="FILE_FULL_DIR_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileFullDirectoryRestartInfo    = 15,
+            FileFullDirectoryRestartInfo = 15,
             /// <summary>
             /// File storage information should be retrieved.
             /// <see cref="FILE_STORAGE_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileStorageInfo                 = 16,
+            FileStorageInfo = 16,
             /// <summary>
             /// File alignment information should be retrieved.
             /// <see cref="FILE_ALIGNMENT_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileAlignmentInfo               = 17,
+            FileAlignmentInfo = 17,
             /// <summary>
             /// File information should be retrieved.
             /// <see cref="FILE_ID_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileIdInfo                      = 18,
+            FileIdInfo = 18,
             /// <summary>
             /// Files in the specified directory should be retrieved.
             /// <see cref="FILE_ID_EXTD_DIR_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileIdExtdDirectoryInfo         = 19,
+            FileIdExtdDirectoryInfo = 19,
             /// <summary>
             /// Identical to FileIdExtdDirectoryInfo, but forces the enumeration operation to start again from the beginning.
             /// <see cref="FILE_ID_EXTD_DIR_INFO"/> 
             /// This value is not supported before Windows 8 and Windows Server 2012
             /// </summary>
-            FileIdExtdDirectoryRestartInfo  = 20,
+            FileIdExtdDirectoryRestartInfo = 20,
             /// <summary>
             /// This value is used for validation. Supported values are less than this value.
             /// </summary>
@@ -358,8 +381,8 @@ internal static partial class Interop
         [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern BOOL GetFileInformationByHandleEx(HANDLE hFile,
-            FILE_INFO_BY_HANDLE_CLASS FileInformationClass, out LPVOID lpFileInformation,
-            DWORD dwBufferSize);
+                                                               FILE_INFO_BY_HANDLE_CLASS FileInformationClass, out LPVOID lpFileInformation,
+                                                               DWORD dwBufferSize);
 
         /// <summary>
         /// Retrieves file information for the specified file.
@@ -371,7 +394,7 @@ internal static partial class Interop
         [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern BOOL GetFileInformationByHandleEx(HANDLE hFile,
-            ref BY_HANDLE_FILE_INFORMATION lpFileInformation);
+                                                               ref BY_HANDLE_FILE_INFORMATION lpFileInformation);
     }
 }
 

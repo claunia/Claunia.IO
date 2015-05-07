@@ -1,5 +1,26 @@
 2015-05-07  Natalia Portillo  <claunia@claunia.com>
 
+	* Claunia.IO.csproj:
+	* Interop/Apple/Interop.Apple.stat.cs:
+	* Interop/Apple/Interop.Apple.uname.cs:
+	* Interop/Apple/Interop.Apple.xattr.cs:
+	* Interop/Apple/Interop.Apple.types.cs:
+	* Interop/Apple/Interop.Apple.stat64.cs:
+	* Interop/Apple/Interop.Apple.statfs.cs:
+	* Interop/Windows/Interop.Windows.EAs.cs:
+	* Interop/Apple/Interop.Apple.statfs64.cs:
+	* Interop/Windows/Interop.Windows.Files.cs:
+	* Interop/Windows/Interop.Windows.types.cs:
+	* Interop/Windows/Interop.Windows.Backup.cs:
+	* Interop/Windows/Interop.Windows.Errors.cs:
+	* Interop/Apple/Interop.Apple.getattrlist.cs:
+	* Interop/Windows/Interop.Windows.Streams.cs:
+	* Interop/Windows/Interop.Windows.Volumes.cs:
+	  Changed everything to use base API type definitions, with
+	  "using" as alias to .NET types.
+
+2015-05-07  Natalia Portillo  <claunia@claunia.com>
+
 	* Tests/Interop.Apple.cs:
 	  Comment testing values not persistent across reboots.
 

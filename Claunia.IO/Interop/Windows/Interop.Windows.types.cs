@@ -30,17 +30,29 @@ using System.Runtime.InteropServices;
 using BOOL = System.Boolean;
 using BOOLEAN = System.Boolean;
 using CCHAR = System.SByte;
+using CHAR = System.Byte;
 using DWORD = System.UInt32;
 using FILE_ID_128 = System.Guid;
 using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
 using LARGE_INTEGER = System.Int64;
 using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
 using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
 using UCHAR = System.Byte;
 using ULONG = System.UInt32;
 using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
 using WCHAR = System.String;
 using WORD = System.UInt16;
+
 #endregion
 
 internal static partial class Interop
@@ -48,7 +60,7 @@ internal static partial class Interop
     internal static partial class Windows
     {
         [Flags]
-        public enum ACCESS_MASK : UInt32
+        public enum ACCESS_MASK : DWORD
         {
             /// <summary>Right to read data from the file. (FILE)</summary>
             FILE_READ_DATA = 0x00000001,
@@ -855,7 +867,8 @@ internal static partial class Interop
         /// <summary>
         /// Contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).
         /// </summary>
-        public struct FILETIME {
+        public struct FILETIME
+        {
             /// <summary>
             /// The low-order part of the file time.
             /// </summary>
@@ -869,11 +882,12 @@ internal static partial class Interop
         /// <summary>
         /// Contains information that the <see cref="GetFileInformationByHandle"/> function retrieves.
         /// </summary>
-        public struct BY_HANDLE_FILE_INFORMATION {
+        public struct BY_HANDLE_FILE_INFORMATION
+        {
             /// <summary>
             /// The file attributes. <see cref="FILE_ATTRIBUTES"/> 
             /// </summary>
-            public FILE_ATTRIBUTES    dwFileAttributes;
+            public FILE_ATTRIBUTES dwFileAttributes;
             /// <summary>
             /// A FILETIME structure that specifies when a file or directory is created. If the underlying file system does not support creation time, this member is zero (0).
             /// </summary>
@@ -889,23 +903,23 @@ internal static partial class Interop
             /// <summary>
             /// The serial number of the volume that contains a file.
             /// </summary>
-            public DWORD    dwVolumeSerialNumber;
+            public DWORD dwVolumeSerialNumber;
             /// <summary>
             /// The high-order part of the file size.
             /// </summary>
-            public DWORD    nFileSizeHigh;
+            public DWORD nFileSizeHigh;
             /// <summary>
             /// The low-order part of the file size.
             /// </summary>
-            public DWORD    nFileSizeLow;
+            public DWORD nFileSizeLow;
             /// <summary>
             /// The number of links to this file. For the FAT file system this member is always 1. For the NTFS file system, it can be more than 1.
             /// </summary>
-            public DWORD    nNumberOfLinks;
+            public DWORD nNumberOfLinks;
             /// <summary>
             /// The high-order part of a unique identifier that is associated with a file. For more information, see <see cref="nFileIndexLow"/>.
             /// </summary>
-            public DWORD    nFileIndexHigh;
+            public DWORD nFileIndexHigh;
             /// <summary>
             /// The low-order part of a unique identifier that is associated with a file.
             /// The identifier (low and high parts) and the volume serial number uniquely
@@ -919,7 +933,7 @@ internal static partial class Interop
             /// <see cref="FILE_ID_INFO"/> structure. The 64-bit identifier in this structure
             /// is not guaranteed to be unique on ReFS.
             /// </summary>
-            public DWORD    nFileIndexLow;
+            public DWORD nFileIndexLow;
         }
     }
 }

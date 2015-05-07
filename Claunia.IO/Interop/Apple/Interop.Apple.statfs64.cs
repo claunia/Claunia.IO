@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Apple.statfs.cs
+// Interop.Apple.statfs64.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -27,7 +27,10 @@ using System;
 using System.Runtime.InteropServices;
 
 #region Mac OS X type definitions
+using int32_t = System.Int32;
 using uid_t = System.UInt32;
+using uint32_t = System.UInt32;
+using uint64_t = System.UInt64;
 
 #endregion
 
@@ -36,126 +39,92 @@ internal static partial class Interop
     internal static partial class Apple
     {
         /// <summary>
-        /// statfs(2) structure when _DARWIN_FEATURE_64_BIT_INODE is defined
+        /// statfs(2) structure when _DARWIN_FEATURE_64_BIT_INODE is NOT defined
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        internal struct StatFS
+        internal struct StatFS64
         {
-            /// <summary>
-            /// Type of file system (reserved: zero)
-            /// </summary>
-            [MarshalAs(UnmanagedType.I2)]
-            Int16 f_otype;
-            /// <summary>
-            /// Copy of mount flags (reserved: zero)
-            /// </summary>
-            [MarshalAs(UnmanagedType.I2)]
-            Int16 f_oflags;
             /// <summary>
             /// Fundamental file system block size
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_bsize;
+            uint32_t f_bsize;
             /// <summary>
             /// Optimal transfer block size
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_iosize;
+            int32_t f_iosize;
             /// <summary>
             /// Total data blocks in file system
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_blocks;
+            uint64_t f_blocks;
             /// <summary>
             /// Free blocks in file system
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_bfree;
+            uint64_t f_bfree;
             /// <summary>
             /// Free blocks avail to non-superuser
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_bavail;
+            uint64_t f_bavail;
             /// <summary>
             /// Total file nodes in file system
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_files;
+            uint64_t f_files;
             /// <summary>
             /// Free file nodes in file system
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_ffree;
+            uint64_t f_ffree;
             /// <summary>
             /// File system id
             /// </summary>
             fsid_t f_fsid;
             /// <summary>
-            /// User that mounted the file system
+            /// User that mounted the filesystem
             /// </summary>
-            [MarshalAs(UnmanagedType.U4)]
             uid_t f_owner;
             /// <summary>
-            /// Reserved for future use
+            /// Type of filesystem
             /// </summary>
-            [MarshalAs(UnmanagedType.I2)]
-            [Obsolete("RESERVED: DO NOT USE")]
-            Int16 f_reserved1;
+            UInt32 f_type;
             /// <summary>
-            /// Type of file system (reserved)
+            /// Copy of mount exported flags
             /// </summary>
-            [MarshalAs(UnmanagedType.I2)]
-            Int16 f_type;
+            UInt32 f_flags;
             /// <summary>
-            /// Copy of mount flags (reserved)
+            /// File system sub-type (flavor)
             /// </summary>
-            [MarshalAs(UnmanagedType.I8)]
-            Int64 f_flags;
-            /// <summary>
-            /// Reserved for future use
-            /// </summary>
-            [MarshalAs(UnmanagedType.ByValArray, 
-                ArraySubType = UnmanagedType.I8, SizeConst = 2)]
-            [Obsolete("RESERVED: DO NOT USE")]
-            Int64[] f_reserved2;
+            UInt32 f_fssubtype;
             /// <summary>
             /// File system type name
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             string f_fstypename;
             /// <summary>
             /// Directory on which mounted
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 90)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1024)]
             string f_mntonname;
             /// <summary>
             /// Mounted file system
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 90)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1024)]
             string f_mntfromname;
             /// <summary>
-            /// Reserved for future use
-            /// </summary>
-            [Obsolete("RESERVED: DO NOT USE")]
-            sbyte f_reserved3;
-            /// <summary>
-            /// Reserved for future use
+            /// For future use
             /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, 
-                ArraySubType = UnmanagedType.I8, SizeConst = 4)]
+                ArraySubType = UnmanagedType.I8, SizeConst = 8)]
             [Obsolete("RESERVED: DO NOT USE")]
-            Int64[] f_reserved4;
+            uint32_t[] f_reserved;
         }
 
         /// <summary>
         /// Obtains information of the file system mounted at <paramref name="path"/>.
-        /// Calls to system's statfs(2)
+        /// Calls to system's statfs64(2)
         /// </summary>
         /// <param name="path">Path to the filesystem mount point.</param>
-        /// <param name="buf"><see cref="Stat"/> on 32 bit systems and <see cref="Stat64"/> on 64 bit systems.</param>
+        /// <param name="buf"><see cref="Stat64"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int statfs(string path, out StatFS buf);
+        public static extern int statfs64(string path, out StatFS64 buf);
     }
 }
 

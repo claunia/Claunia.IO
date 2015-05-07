@@ -26,6 +26,28 @@
 using System;
 using System.Runtime.InteropServices;
 
+#region Mac OS X 32-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int32;
+using dev_t = System.Int32;
+using gid_t = System.UInt32;
+using ino_t = System.UInt32;
+using int32_t = System.Int32;
+using int64_t = System.Int64;
+using nlink_t = System.UInt16;
+using off_t = System.Int64;
+using quad_t = System.Int64;
+using size_t = System.UInt32;
+using uid_t = System.UInt32;
+using uint32_t = System.UInt32;
+using u_int16_t = System.UInt16;
+using u_int32_t = System.UInt32;
+using u_long = System.UInt32;
+using u_short = System.UInt16;
+
+#endregion
+
+
 internal static partial class Interop
 {
     internal static partial class Apple
@@ -84,7 +106,7 @@ internal static partial class Interop
         /// <param name="options"><see cref="xattrOptions"/>.</param>
         /// <returns>Size of the extended attribute. On failure, -1, and errno is set</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int getxattr(string path, string name, IntPtr value, UInt32 size, UInt32 position, xattrOptions options);
+        public static extern int getxattr(string path, string name, IntPtr value, size_t size, u_int32_t position, xattrOptions options);
 
         /// <summary>
         /// Sets an extended attribute value
@@ -98,7 +120,7 @@ internal static partial class Interop
         /// <param name="options"><see cref="xattrOptions"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int setxattr(string path, string name, IntPtr value, UInt32 size, UInt32 position, xattrOptions options);
+        public static extern int setxattr(string path, string name, IntPtr value, size_t size, u_int32_t position, xattrOptions options);
 
         /// <summary>
         /// Removes an extended attribute
@@ -124,7 +146,7 @@ internal static partial class Interop
         /// If the file has no extended attributes, 0.
         /// On failure, -1, and errno is set</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int listxattr(string path, IntPtr namebuf, UInt32 size, xattrOptions options);
+        public static extern int listxattr(string path, IntPtr namebuf, size_t size, xattrOptions options);
     }
 }
 

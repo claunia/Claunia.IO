@@ -23,11 +23,40 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
-using Microsoft.Win32.SafeHandles;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using Microsoft.Win32.SafeHandles;
+
+#region Win32 type definitions
+using BOOL = System.Boolean;
+using BOOLEAN = System.Boolean;
+using CCHAR = System.SByte;
+using CHAR = System.Byte;
+using DWORD = System.UInt32;
+using FILE_ID_128 = System.Guid;
+using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LARGE_INTEGER = System.Int64;
+using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
+using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
+using UCHAR = System.Byte;
+using ULONG = System.UInt32;
+using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
+using WCHAR = System.String;
+using WORD = System.UInt16;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -85,10 +114,10 @@ internal static partial class Interop
         /// <param name="lpFindStreamData">A pointer to a buffer that receives the file stream data. The format of this data depends on the value of the <paramref name="InfoLevel"/> parameter.</param>
         /// <param name="dwFlags">Reserved for future use. This parameter must be zero.</param>
         [DllImport(Libraries.Kernel32, ExactSpelling = true, CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern SafeFindHandle FindFirstStreamW(string lpFileName,
+        public static extern SafeFindHandle FindFirstStreamW(LPCWSTR lpFileName,
                                                              STREAM_INFO_LEVELS InfoLevel,
                                                              [In, Out, MarshalAs(UnmanagedType.LPStruct)] WIN32_FIND_STREAM_DATA lpFindStreamData,
-                                                             uint dwFlags);
+                                                             DWORD dwFlags);
 
 
         /// <summary>
@@ -99,7 +128,7 @@ internal static partial class Interop
         /// <param name="lpFindStreamData">A pointer to the <see cref="WIN32_FIND_STREAM_DATA"/> structure that receives information about the stream.</param>
         [DllImport(Libraries.Kernel32, ExactSpelling = true, CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool FindNextStreamW(SafeFindHandle hndFindFile,
+        public static extern BOOL FindNextStreamW(SafeFindHandle hndFindFile,
                                                   [In, Out, MarshalAs(UnmanagedType.LPStruct)] WIN32_FIND_STREAM_DATA lpFindStreamData);
     }
 }

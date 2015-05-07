@@ -23,16 +23,44 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
-using System.Text;
+using System.Runtime.InteropServices;
+
+#region Win32 type definitions
+using BOOL = System.Boolean;
+using BOOLEAN = System.Boolean;
+using CCHAR = System.SByte;
+using CHAR = System.Byte;
+using DWORD = System.UInt32;
+using FILE_ID_128 = System.Guid;
+using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LARGE_INTEGER = System.Int64;
+using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
+using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
+using UCHAR = System.Byte;
+using ULONG = System.UInt32;
+using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
+using WCHAR = System.String;
+using WORD = System.UInt16;
+
+#endregion
 
 internal static partial class Interop
 {
     internal static partial class Windows
     {
         [Flags]
-        public enum FileSystemFlags : uint
+        public enum FileSystemFlags : LPDWORD
         {
             /// <summary>
             /// The specified volume supports case-sensitive file names.
@@ -146,15 +174,14 @@ internal static partial class Interop
         /// <param name="nFileSystemNameSize">Length of <paramref name="lpFileSystemNameBuffer"/>, to a maxium of <see cref="MAX_PATH"/>.</param>
         [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        extern static bool GetVolumeInformation(
-            string lpRootPathName,
-            StringBuilder lpVolumeNameBuffer,
-            int nVolumeNameSize,
-            out uint lpVolumeSerialNumber,
-            out uint lpMaximumComponentLength,
+        extern static BOOL GetVolumeInformation(
+            LPCTSTR lpRootPathName,
+            LPTSTR lpVolumeNameBuffer,
+            DWORD nVolumeNameSize,
+            out LPDWORD lpVolumeSerialNumber,
+            out LPDWORD lpMaximumComponentLength,
             out FileSystemFlags lpFileSystemFlags,
-            StringBuilder lpFileSystemNameBuffer,
-            int nFileSystemNameSize);
+            LPTSTR lpFileSystemNameBuffer,
+            DWORD nFileSystemNameSize);
     }
 }
-

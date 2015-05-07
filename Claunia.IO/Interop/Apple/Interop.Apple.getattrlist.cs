@@ -23,8 +23,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
+
+#region Mac OS X type definitions
+using int32_t = System.Int32;
+using u_int16_t = System.UInt16;
+using u_int32_t = System.UInt32;
+using u_short = System.UInt16;
+
+// Only applicable to Mac OS X 32-bit ABI
+using size_t = System.UInt32;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -40,12 +51,12 @@ internal static partial class Interop
             /// Number of attr bit sets in list, ATTR_BIT_MAP_COUNT
             /// </summary>
             [MarshalAs(UnmanagedType.U2)]
-            public ushort bitmapCount;
+            public u_short bitmapCount;
             /// <summary>
             /// To maintain 4-byte alignment
             /// </summary>
             [MarshalAs(UnmanagedType.U2)]
-            public UInt16 reserved;
+            public u_int16_t reserved;
             /// <summary>
             /// Common attribut group
             /// </summary>
@@ -83,12 +94,12 @@ internal static partial class Interop
             /// Offset in bytes from this structure to the structure data
             /// </summary>
             [MarshalAs(UnmanagedType.I4)]
-            Int32 dataOffset;
+            int32_t dataOffset;
             /// <summary>
             /// Length of the attribute data in bytes, always alligned to 4 bytes.
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            UInt32 Length;
+            u_int32_t Length;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -103,17 +114,17 @@ internal static partial class Interop
             /// Contains information about optional functions supported by the volume format implementation
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            public UInt32 volCapabilitiesInterfaces;
+            public volCapabilitiesInterfaces_t volCapabilitiesInterfaces;
             /// <summary>
             /// Reserved, should be 0.
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            public UInt32 volCapabilitiesReserved1;
+            public u_int32_t volCapabilitiesReserved1;
             /// <summary>
             /// Reserved, should be 0.
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            public UInt32 volCapabilitiesReserved2;
+            public u_int32_t volCapabilitiesReserved2;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -577,7 +588,7 @@ internal static partial class Interop
         }
 
         [Flags]
-        internal enum volCapabilitiesFormat_t : uint
+        internal enum volCapabilitiesFormat_t : u_int32_t
         {
             /// <summary>
             /// The volume supports persistent object identifiers
@@ -664,7 +675,7 @@ internal static partial class Interop
         }
 
         [Flags]
-        internal enum volCapabilitiesInterfaces_t : uint
+        internal enum volCapabilitiesInterfaces_t : u_int32_t
         {
             /// <summary>
             /// The volume implementation supports searchfs(2)
@@ -743,7 +754,7 @@ internal static partial class Interop
         /// <param name="options"><see cref="getAttrListOptions"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int getattrlist(string path, AttrList attrList, IntPtr attrBuf, UInt32 attrBufSize, UInt32 options);
+        public static extern int getattrlist(string path, AttrList attrList, IntPtr attrBuf, size_t attrBufSize, UInt32 options);
 
         /// <summary>
         /// Sets the specified lists of attributes for the file system object.
@@ -756,7 +767,7 @@ internal static partial class Interop
         /// <param name="options"><see cref="getAttrListOptions"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int setattrlist(string path, AttrList attrList, IntPtr attrBuf, UInt32 attrBufSize, UInt32 options);
+        public static extern int setattrlist(string path, AttrList attrList, IntPtr attrBuf, size_t attrBufSize, UInt32 options);
     }
 }
 

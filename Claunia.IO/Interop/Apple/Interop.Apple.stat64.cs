@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Apple.stat.cs
+// Interop.Apple.stat64.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -26,23 +26,20 @@
 using System;
 using System.Runtime.InteropServices;
 
-#region Mac OS X 32-bit type definitions
+#region Mac OS X 64-bit type definitions
 using blkcnt_t = System.Int64;
 using blksize_t = System.Int32;
 using dev_t = System.Int32;
 using gid_t = System.UInt32;
-using ino_t = System.UInt32;
+using ino_t = System.UInt64;
 using int32_t = System.Int32;
 using int64_t = System.Int64;
 using nlink_t = System.UInt16;
 using off_t = System.Int64;
-using quad_t = System.Int64;
-using size_t = System.UInt32;
 using uid_t = System.UInt32;
 using uint32_t = System.UInt32;
 using u_int16_t = System.UInt16;
 using u_int32_t = System.UInt32;
-using u_long = System.UInt32;
 using u_short = System.UInt16;
 
 #endregion
@@ -52,21 +49,16 @@ internal static partial class Interop
     internal static partial class Apple
     {
         /// <summary>
-        /// stat(2) structure when __DARWIN_64_BIT_INO_T is NOT defined
+        /// stat(2) structure when __DARWIN_64_BIT_INO_T is defined
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        internal struct Stat
+        internal struct Stat64
         {
             /// <summary>
             /// ID of device containing file
             /// </summary>
             [MarshalAs(UnmanagedType.I4)]
-            public dev_t st_dev;
-            /// <summary>
-            /// File serial number
-            /// </summary>
-            [MarshalAs(UnmanagedType.U4)]
-            public ino_t st_ino;
+            public int st_dev;
             /// <summary>
             /// Mode of file
             /// </summary>
@@ -76,22 +68,27 @@ internal static partial class Interop
             /// Number of hard links
             /// </summary>
             [MarshalAs(UnmanagedType.U2)]
-            public nlink_t st_nlink;
+            public ushort st_nlink;
+            /// <summary>
+            /// File serial number
+            /// </summary>
+            [MarshalAs(UnmanagedType.U8)]
+            public ulong st_ino;
             /// <summary>
             /// User ID of the file
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            public uid_t st_uid;
+            public uint st_uid;
             /// <summary>
             /// Group ID of the file
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            public gid_t st_gid;
+            public uint st_gid;
             /// <summary>
             /// Device ID
             /// </summary>
             [MarshalAs(UnmanagedType.I4)]
-            public dev_t st_rdev;
+            public int st_rdev;
             /// <summary>
             /// time of last access
             /// </summary>
@@ -105,20 +102,24 @@ internal static partial class Interop
             /// </summary>
             public Timespec st_ctimespec;
             /// <summary>
+            /// time of file creation(birth)
+            /// </summary>
+            public Timespec st_birthtimespec;
+            /// <summary>
             /// file size, in bytes
             /// </summary>
             [MarshalAs(UnmanagedType.I8)]
-            public off_t st_size;
+            public long st_size;
             /// <summary>
             /// blocks allocated for file
             /// </summary>
             [MarshalAs(UnmanagedType.I8)]
-            public quad_t st_blocks;
+            public long st_blocks;
             /// <summary>
             /// optimal blocksize for I/O
             /// </summary>
             [MarshalAs(UnmanagedType.I4)]
-            public u_long st_blksize;
+            public int st_blksize;
             /// <summary>
             /// user defined flags for file
             /// </summary>
@@ -128,18 +129,31 @@ internal static partial class Interop
             /// file generation number
             /// </summary>
             [MarshalAs(UnmanagedType.U4)]
-            public u_long st_gen;
+            public uint st_gen;
+            /// <summary>
+            /// Reserved: DO NOT USE
+            /// </summary>
+            [MarshalAs(UnmanagedType.U4)]
+            [Obsolete("RESERVED: DO NOT USE")]
+            public uint st_lspare;
+            /// <summary>
+            /// Reserved: DO NOT USE
+            /// </summary>
+            [MarshalAs(UnmanagedType.ByValArray, 
+                ArraySubType = UnmanagedType.U8, SizeConst = 2)]
+            [Obsolete("RESERVED: DO NOT USE")]
+            public ulong[] st_qspare;
         }
 
         /// <summary>
         /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat(2)
+        /// Calls to system's stat64(2)
         /// </summary>
         /// <param name="path">Path to the file.</param>
-        /// <param name="buf"><see cref="Stat"/> on 32 bit systems and <see cref="Stat64"/> on 64 bit systems.</param>
+        /// <param name="buf"><see cref="Stat64"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int stat(string path, out Stat buf);
+        public static extern int stat64(string path, out Stat64 buf);
     }
 }
 

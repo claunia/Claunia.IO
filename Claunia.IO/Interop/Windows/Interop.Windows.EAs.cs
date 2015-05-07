@@ -23,8 +23,37 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
+
+#region Win32 type definitions
+using BOOL = System.Boolean;
+using BOOLEAN = System.Boolean;
+using CCHAR = System.SByte;
+using CHAR = System.Byte;
+using DWORD = System.UInt32;
+using FILE_ID_128 = System.Guid;
+using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LARGE_INTEGER = System.Int64;
+using LONGLONG = System.Int64;
+using LPBYTE = System.IntPtr;
+using LPCTSTR = System.String;
+using LPCWSTR = System.String;
+using LPDWORD = System.UInt32;
+using LPTSTR = System.Text.StringBuilder;
+using LPVOID = System.IntPtr;
+using PHANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using PLARGE_INTEGER = System.Int64;
+using PULONG = System.UInt32;
+using PVOID = System.IntPtr;
+using UCHAR = System.Byte;
+using ULONG = System.UInt32;
+using ULONGLONG = System.UInt64;
+using USHORT = System.UInt16;
+using WCHAR = System.String;
+using WORD = System.UInt16;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -42,7 +71,7 @@ internal static partial class Interop
             /// <summary>
             /// This is set to a request-dependent value. For example, on successful completion of a transfer request, this is set to the number of bytes transferred. If a transfer request is completed with another STATUS_XXX, this member is set to zero.
             /// </summary>
-            public ulong information;
+            public PVOID information;
         }
 
         const byte FILE_NEED_EA = 0x80;
@@ -55,23 +84,23 @@ internal static partial class Interop
             /// <summary>
             /// The offset of the next <see cref="FILE_FULL_EA_INFORMATION"/>-type entry. This member is zero if no other entries follow this one.
             /// </summary>
-            public ulong NextEntryOffset;
+            public ULONG NextEntryOffset;
             /// <summary>
             /// Can be zero or can be set with <see cref="FILE_NEED_EA"/>, indicating that the file to which the EA belongs cannot be interpreted without understanding the associated extended attributes.
             /// </summary>
-            public byte Flags;
+            public UCHAR Flags;
             /// <summary>
             /// The length in bytes of the <see cref="EaName"/> array. This value does not include a <c>null</c>-terminator to <see cref="EaName"/>.
             /// </summary>
-            public byte EaNameLength;
+            public UCHAR EaNameLength;
             /// <summary>
             /// The length in bytes of each EA value in the array.
             /// </summary>
-            public ushort EaValueLength;
+            public USHORT EaValueLength;
             /// <summary>
             /// An array of characters naming the EA for this entry.
             /// </summary>
-            public byte[] EaName;
+            public CHAR[] EaName;
         }
 
         /// <summary>
@@ -82,15 +111,15 @@ internal static partial class Interop
             /// <summary>
             /// Offset, in bytes, of the next <see cref="FILE_GET_EA_INFORMATION"/>-typed entry. This member is zero if no other entries follow this one.
             /// </summary>
-            public ulong NextEntryOffset;
+            public ULONG NextEntryOffset;
             /// <summary>
             /// Length, in bytes, of the EaName array. This value does not include a <c>NULL</c> terminator.
             /// </summary>
-            public byte EaNameLength;
+            public UCHAR EaNameLength;
             /// <summary>
             /// Specifies the first character of the name of the extended attribute to be queried. This is followed in memory by the remainder of the string.
             /// </summary>
-            public byte[] EaName;
+            public CHAR[] EaName;
         }
 
         /// <summary>
@@ -112,9 +141,9 @@ internal static partial class Interop
         /// <param name="RestartScan">Set to <c>true</c> if NtQueryEaFile should begin the scan at the first entry in the file's extended-attribute list. If this parameter is set to <c>false</c>, the routine resumes the scan from a previous call to ZwQueryEaFile.</param>
         [DllImport(Libraries.NTDLL)]
         public static extern NTSTATUS NtQueryEaFile(IntPtr FileHandle,
-                                                    ref IO_STATUS_BLOCK IoStatusBlock, IntPtr Buffer, ulong Length,
-                                                    [MarshalAs(UnmanagedType.Bool)] bool ReturnSingleEntry, IntPtr EaList, UInt32 EaListLength, ref UInt32 EaIndex,
-                                                    UInt32 RestartScan);
+                                                    ref IO_STATUS_BLOCK IoStatusBlock, PVOID Buffer, ULONG Length,
+                                                    [MarshalAs(UnmanagedType.Bool)] BOOLEAN ReturnSingleEntry, PVOID EaList, ULONG EaListLength, ref PULONG EaIndex,
+                                                    [MarshalAs(UnmanagedType.Bool)] BOOLEAN RestartScan);
 
         /// <summary>
         /// Sets extended-attribute (EA) values for a file.
@@ -127,7 +156,7 @@ internal static partial class Interop
         /// <param name="Buffer">A pointer to a caller-supplied, <see cref="FILE_FULL_EA_INFORMATION"/>-structured input buffer that contains the extended attribute values to be set.</param>
         /// <param name="Length">Length, in bytes, of the buffer that the Buffer parameter points to.</param>
         [DllImport(Libraries.NTDLL)]
-        public static extern NTSTATUS NtSetEaFile(IntPtr FileHandle, ref IO_STATUS_BLOCK IoStatusBlock, IntPtr Buffer, UInt32 Length);
+        public static extern NTSTATUS NtSetEaFile(HANDLE FileHandle, ref IO_STATUS_BLOCK IoStatusBlock, PVOID Buffer, ULONG Length);
     }
 }
 
