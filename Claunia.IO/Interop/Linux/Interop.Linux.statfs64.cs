@@ -23,8 +23,25 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
+
+#region Linux 64-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int64;
+using dev_t = System.UInt64;
+using fsblkcnt_t = System.UInt64;
+using fsfilcnt_t = System.UInt64;
+using gid_t = System.UInt32;
+using ino_t = System.UInt64;
+using nlink_t = System.UInt64;
+using off_t = System.Int64;
+using size_t = System.UInt64;
+using ssize_t = System.Int64;
+using uid_t = System.UInt32;
+using __fsword_t = System.Int64;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -39,31 +56,31 @@ internal static partial class Interop
             /// <summary>
             /// Type of filesystem (see below)
             /// </summary>
-            Int64 f_type;
+            __fsword_t f_type;
             /// <summary>
             /// Optimal transfer block size
             /// </summary>
-            Int64 f_bsize;
+            __fsword_t f_bsize;
             /// <summary>
             /// Total data blocks in filesystem
             /// </summary>
-            UInt64 f_blocks;
+            fsblkcnt_t f_blocks;
             /// <summary>
             /// Free blocks in filesystem
             /// </summary>
-            UInt64 f_bfree;
+            fsblkcnt_t f_bfree;
             /// <summary>
             /// Free blocks available to unprivileged user
             /// </summary>
-            UInt64 f_bavail;
+            fsblkcnt_t f_bavail;
             /// <summary>
             /// Total file nodes in filesystem
             /// </summary>
-            UInt64 f_files;
+            fsfilcnt_t f_files;
             /// <summary>
             /// Free file nodes in filesystem
             /// </summary>
-            UInt64 f_ffree;
+            fsfilcnt_t f_ffree;
             /// <summary>
             /// Filesystem ID
             /// </summary>
@@ -71,11 +88,11 @@ internal static partial class Interop
             /// <summary>
             /// Maximum length of filenames
             /// </summary>
-            Int64 f_namelen;
+            __fsword_t f_namelen;
             /// <summary>
             /// Fragment size (since Linux 2.6)
             /// </summary>
-            Int64 f_frsize;
+            __fsword_t f_frsize;
             /// <summary>
             /// Mount flags of filesystem (since Linux 2.6.36)
             /// </summary>
@@ -85,7 +102,7 @@ internal static partial class Interop
             /// </summary>
             [MarshalAs(UnmanagedType.ByValArray, 
                 ArraySubType = UnmanagedType.I8, SizeConst = 4)]
-            Int64[] f_spare;
+            __fsword_t[] f_spare;
         }
 
         /// <summary>

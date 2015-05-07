@@ -1,5 +1,23 @@
 2015-05-07  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Linux/Interop.Linux.stat.cs:
+	* Interop/Linux/Interop.Linux.xattr.cs:
+	* Interop/Linux/Interop.Linux.types.cs:
+	* Interop/Linux/Interop.Linux.statfs.cs:
+	* Interop/Linux/Interop.Linux.stat64.cs:
+	* Interop/Linux/Interop.Linux.xattr64.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.stat.cs:
+	* Interop/Linux/Interop.Linux.statfs64.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.types.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.uname.cs:
+	* Interop/Linux/Interop.Linux.Libraries.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.statfs.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.extattr.cs:
+	  Changed everything to use base API type definitions, with
+	  "using" as alias to .NET types.
+
+2015-05-07  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Linux/Interop.Linux.stat.cs:
 	* Interop/Linux/Interop.Linux.xattr.cs:

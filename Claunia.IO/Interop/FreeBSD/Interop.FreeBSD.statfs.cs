@@ -1,5 +1,5 @@
 ﻿//
-// Interop.FreeBSD.stat.cs
+// Interop.FreeBSD.statfs.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -23,8 +23,27 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
+
+#region FreeBSD 64-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int32;
+using gid_t = System.UInt32;
+using ino_t = System.UInt32;
+using int64_t = System.Int64;
+using nlink_t = System.UInt16;
+using off_t = System.Int64;
+using size_t = System.Int64;
+using ssize_t = System.Int64;
+using uid_t = System.UInt32;
+using uint32_t = System.UInt32;
+using uint64_t = System.UInt64;
+using __dev_t = System.UInt32;
+using __int32_t = System.Int32;
+using __uint32_t = System.UInt32;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -37,42 +56,42 @@ internal static partial class Interop
         internal struct StatFS
         {
             /// <summary>structure version number</summary>
-            UInt32 f_version;
+            uint32_t f_version;
             /// <summary>type of filesystem</summary>
-            UInt32 f_type;
+            uint32_t f_type;
             /// <summary>copy of mount exported flags</summary>
             mntflags_t f_flags;
             /// <summary>filesystem fragment size</summary>
-            UInt64 f_bsize;
+            uint64_t f_bsize;
             /// <summary>optimal transfer block size</summary>
-            UInt64 f_iosize;
+            uint64_t f_iosize;
             /// <summary>total data blocks in filesystem</summary>
-            UInt64 f_blocks;
+            uint64_t f_blocks;
             /// <summary>free blocks in filesystem</summary>
-            UInt64 f_bfree;
+            uint64_t f_bfree;
             /// <summary>free blocks avail to non-superuser</summary>
-            Int64 f_bavail;
+            int64_t f_bavail;
             /// <summary>total file nodes in filesystem</summary>
-            UInt64 f_files;
+            uint64_t f_files;
             /// <summary>free nodes avail to non-superuser</summary>
-            Int64 f_ffree;
+            int64_t f_ffree;
             /// <summary>count of sync writes since mount</summary>
-            UInt64 f_syncwrites;
+            uint64_t f_syncwrites;
             /// <summary>count of async writes since mount</summary>
-            UInt64 f_asyncwrites;
+            uint64_t f_asyncwrites;
             /// <summary>count of sync reads since mount</summary>
-            UInt64 f_syncreads;
+            uint64_t f_syncreads;
             /// <summary>count of async reads since mount</summary>
-            UInt64 f_asyncreads;
+            uint64_t f_asyncreads;
             /// <summary>unused spare</summary>
             [MarshalAs(UnmanagedType.ByValArray, 
                 ArraySubType = UnmanagedType.U8, SizeConst = 10)]
             [Obsolete("RESERVED: DO NOT USE")]
-            UInt64[] f_spare;
+            uint64_t[] f_spare;
             /// <summary>maximum filename length</summary>
-            UInt32 f_namemax;
+            uint32_t f_namemax;
             /// <summary>user that mounted the filesystem</summary>
-            UInt32 f_owner;
+            uid_t f_owner;
             /// <summary>filesystem id</summary>
             fsid_t f_fsid;
             /// <summary>spare string space</summary>

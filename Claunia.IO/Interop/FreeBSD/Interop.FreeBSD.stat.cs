@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Apple.stat.cs
+// Interop.FreeBSD.stat.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -23,86 +23,32 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
+
+#region FreeBSD 32-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int32;
+using gid_t = System.UInt32;
+using ino_t = System.UInt32;
+using int64_t = System.Int64;
+using nlink_t = System.UInt16;
+using off_t = System.Int64;
+using size_t = System.Int32;
+using ssize_t = System.Int32;
+using uid_t = System.UInt32;
+using uint32_t = System.UInt32;
+using uint64_t = System.UInt64;
+using __dev_t = System.UInt32;
+using __int32_t = System.Int32;
+using __uint32_t = System.UInt32;
+
+#endregion
 
 internal static partial class Interop
 {
     internal static partial class FreeBSD
     {
-        /// <summary>
-        /// stat(2) structure when 64 bit
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Stat64
-        {
-            /// <summary>
-            /// inode's device
-            /// </summary>
-            UInt32 st_dev;
-            /// <summary>
-            /// inode's number
-            /// </summary>
-            UInt32 st_ino;
-            /// <summary>
-            /// inode protection mode
-            /// </summary>
-            mode_t st_mode;
-            /// <summary>
-            /// number of hard links
-            /// </summary>
-            UInt16 st_nlink;
-            /// <summary>
-            /// user ID of the file's owner
-            /// </summary>
-            UInt32 st_uid;
-            /// <summary>
-            /// group ID of the file's group
-            /// </summary>
-            UInt32 st_gid;
-            /// <summary>
-            /// device type
-            /// </summary>
-            UInt32 st_rdev;
-            /// <summary>
-            /// time of last access
-            /// </summary>
-            Timespec64 st_atim;
-            /// <summary>
-            /// time of last data modification
-            /// </summary>
-            Timespec64 st_mtim;
-            /// <summary>
-            /// time of last file status change
-            /// </summary>
-            Timespec64 st_ctim;
-            /// <summary>
-            /// file size, in bytes
-            /// </summary>
-            Int64 st_size;
-            /// <summary>
-            /// blocks allocated for file
-            /// </summary>
-            Int64 st_blocks;
-            /// <summary>
-            /// optimal blocksize for I/O
-            /// </summary>
-            Int32 st_blksize;
-            /// <summary>
-            /// user defined flags for file
-            /// </summary>
-            flags_t st_flags;
-            /// <summary>
-            /// file generation number
-            /// </summary>
-            UInt32 st_gen;
-            Int32 st_lspare;
-            /// <summary>
-            /// time of file creation
-            /// </summary>
-            Timespec64 st_birthtim;
-        }
-
         /// <summary>
         /// stat(2) structure when 32 bit
         /// </summary>
@@ -112,11 +58,11 @@ internal static partial class Interop
             /// <summary>
             /// inode's device
             /// </summary>
-            UInt32 st_dev;
+            __dev_t st_dev;
             /// <summary>
             /// inode's number
             /// </summary>
-            UInt32 st_ino;
+            ino_t st_ino;
             /// <summary>
             /// inode protection mode
             /// </summary>
@@ -124,19 +70,19 @@ internal static partial class Interop
             /// <summary>
             /// number of hard links
             /// </summary>
-            UInt16 st_nlink;
+            nlink_t st_nlink;
             /// <summary>
             /// user ID of the file's owner
             /// </summary>
-            UInt32 st_uid;
+            uid_t st_uid;
             /// <summary>
             /// group ID of the file's group
             /// </summary>
-            UInt32 st_gid;
+            gid_t st_gid;
             /// <summary>
             /// device type
             /// </summary>
-            UInt32 st_rdev;
+            __dev_t st_rdev;
             /// <summary>
             /// time of last access
             /// </summary>
@@ -152,15 +98,15 @@ internal static partial class Interop
             /// <summary>
             /// file size, in bytes
             /// </summary>
-            Int64 st_size;
+            off_t st_size;
             /// <summary>
             /// blocks allocated for file
             /// </summary>
-            Int64 st_blocks;
+            blkcnt_t st_blocks;
             /// <summary>
             /// optimal blocksize for I/O
             /// </summary>
-            Int32 st_blksize;
+            blksize_t st_blksize;
             /// <summary>
             /// user defined flags for file
             /// </summary>
@@ -168,165 +114,12 @@ internal static partial class Interop
             /// <summary>
             /// file generation number
             /// </summary>
-            UInt32 st_gen;
-            Int32 st_lspare;
+            __uint32_t st_gen;
+            __int32_t st_lspare;
             /// <summary>
             /// time of file creation
             /// </summary>
             Timespec st_birthtim;
-        }
-
-        /// <summary>
-        /// File mode and permissions
-        /// </summary>
-        [Flags]
-        internal enum mode_t : ushort
-        {
-            /// <summary>type of file mask</summary>
-            S_IFMT = 0xF000,
-            /// <summary>named  pipe (fifo)</summary>
-            S_IFIFO = 0x1000,
-            /// <summary>character special</summary>
-            S_IFCHR = 0x2000,
-            /// <summary>directory</summary>
-            S_IFDIR = 0x4000,
-            /// <summary>block  special</summary>
-            S_IFBLK = 0x6000,
-            /// <summary>regular</summary>
-            S_IFREG = 0x8000,
-            /// <summary>symbolic link </summary>
-            S_IFLNK = 0xA000,
-            /// <summary>socket</summary>
-            S_IFSOCK = 0xC000,
-            /// <summary>whiteout</summary>
-            S_IFWHT = 0xE000,
-            /// <summary>set user id on execution</summary>
-            S_ISUID = 0x0800,
-            /// <summary>set group id on execution</summary>
-            S_ISGID = 0x0400,
-            /// <summary>save swapped text even after use</summary>
-            S_ISVTX = 0x0200,
-            /// <summary>RWX mask for owner</summary>
-            S_IRWXU = 0x01C0,
-            /// <summary>read permission, owner</summary>
-            S_IRUSR = 0x0100,
-            /// <summary>write  permission, owner</summary>
-            S_IWUSR = 0x0080,
-            /// <summary>execute/search permission, owner</summary>
-            S_IXUSR = 0x0040,
-            /// <summary>RWX mask for group</summary>
-            S_IRWXG = 0x0038,
-            /// <summary>read permission, group</summary>
-            S_IRGRP = 0x0020,
-            /// <summary>write  permission, group</summary>
-            S_IWGRP = 0x0010,
-            /// <summary>execute/search permission, group</summary>
-            S_IXGRP = 0x0008,
-            /// <summary>RWX mask for other</summary>
-            S_IRWXO = 0x0007,
-            /// <summary>read permission, other</summary>
-            S_IROTH = 0x0004,
-            /// <summary>write  permission, other</summary>
-            S_IWOTH = 0x0002,
-            /// <summary>execute/search permission, other</summary>
-            S_IXOTH = 0x0001
-        }
-
-        /// <summary>
-        /// User-set flags
-        /// </summary>
-        [Flags]
-        internal enum flags_t : uint
-        {
-            /// <summary>
-            /// Mask of owner changeable flags
-            /// </summary>
-            UF_SETTABLE = 0x0000FFFF,
-            /// <summary>
-            /// Do not dump file
-            /// </summary>
-            UF_NODUMP = 0x00000001,
-            /// <summary>
-            /// File may not be changed
-            /// </summary>
-            UF_IMMUTABLE = 0x00000002,
-            /// <summary>
-            /// Writes to file may only append
-            /// </summary>
-            UF_APPEND = 0x00000004,
-            /// <summary>
-            /// The directory is opaque when viewed through a union stack.
-            /// </summary>
-            UF_OPAQUE = 0x00000008,
-            /// <summary>
-            /// File may not be removed or renamed.
-            /// </summary>
-            UF_NOUNLINK = 0x00000010,
-            /// <summary>
-            /// File is compressed in HFS+ (>=10.6)
-            /// </summary>
-            [Obsolete("Unimplemented in FreeBSD")]
-            UF_COMPRESSED = 0x00000020,
-            /// <summary>
-            /// OBSOLETE: No longer used.
-            /// Issue notifications for deletes or renames of files with this flag set
-            /// </summary>
-            [Obsolete("Unimplemented in FreeBSD")]
-            UF_TRACKED = 0x00000040,
-            /// <summary>
-            /// Windows system file bit
-            /// </summary>
-            UF_SYSTEM = 0x00000080,
-            /// <summary>
-            /// Sparse file
-            /// </summary>
-            UF_SPARSE = 0x00000100,
-            /// <summary>
-            /// File is offline
-            /// </summary>
-            UF_OFFLINE = 0x00000200,
-            /// <summary>
-            /// Windows reparse point file bit
-            /// </summary>
-            UF_REPARSE = 0x00000400,
-            /// <summary>
-            /// File needs to be archived
-            /// </summary>
-            UF_ARCHIVE = 0x00000800,
-            /// <summary>
-            /// Windows readonly file bit
-            /// </summary>
-            UF_READONLY = 0x00001000,
-
-            /// <summary>
-            /// File is hidden
-            /// </summary>
-            UF_HIDDEN = 0x00008000,
-
-            /// <summary>
-            /// Mask of superuser changeable flags
-            /// </summary>
-            SF_SETTABLE = 0xffff0000,
-            /// <summary>
-            /// File is archived
-            /// </summary>
-            SF_ARCHIVED = 0x00010000,
-            /// <summary>
-            /// File may not be changed
-            /// </summary>
-            SF_IMMUTABLE = 0x00020000,
-            /// <summary>
-            /// Writes to file may only append
-            /// </summary>
-            SF_APPEND = 0x00040000,
-            /// <summary>
-            /// File may not be removed or renamed
-            /// </summary>
-            SF_NOUNLINK = 0x00100000,
-            /// <summary>
-            /// Snapshot inode
-            /// </summary>
-            SF_SNAPSHOT = 0x00200000
         }
 
         /// <summary>
@@ -338,15 +131,5 @@ internal static partial class Interop
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int stat(string path, out Stat buf);
-
-        /// <summary>
-        /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat64(2)
-        /// </summary>
-        /// <param name="path">Path to the file.</param>
-        /// <param name="buf"><see cref="Stat64"/>.</param>
-        /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
-        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint="stat")]
-        public static extern int stat64(string path, out Stat64 buf);
     }
 }

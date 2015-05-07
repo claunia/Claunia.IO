@@ -23,8 +23,25 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
+
+#region Linux 64-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int64;
+using dev_t = System.UInt64;
+using fsblkcnt_t = System.UInt64;
+using fsfilcnt_t = System.UInt64;
+using gid_t = System.UInt32;
+using ino_t = System.UInt64;
+using nlink_t = System.UInt64;
+using off_t = System.Int64;
+using size_t = System.UInt64;
+using ssize_t = System.Int64;
+using uid_t = System.UInt32;
+using __fsword_t = System.Int64;
+
+#endregion
 
 internal static partial class Interop
 {
@@ -39,15 +56,15 @@ internal static partial class Interop
             /// <summary>
             /// ID of device containing file
             /// </summary>
-            UInt64 st_dev;
+            dev_t st_dev;
             /// <summary>
             /// inode number
             /// </summary>
-            UInt64 st_ino;
+            ino_t st_ino;
             /// <summary>
             /// number of hard links
             /// </summary>
-            UInt64 st_nlink;
+            nlink_t st_nlink;
             /// <summary>
             /// protection
             /// </summary>
@@ -55,11 +72,11 @@ internal static partial class Interop
             /// <summary>
             /// user ID of owner
             /// </summary>
-            UInt32 st_uid;
+            uid_t st_uid;
             /// <summary>
             /// group ID of owner
             /// </summary>
-            UInt32 st_gid;
+            gid_t st_gid;
             /// <summary>
             /// padding
             /// </summary>
@@ -67,19 +84,19 @@ internal static partial class Interop
             /// <summary>
             /// device ID (if special file)
             /// </summary>
-            UInt64 st_rdev;
+            dev_t st_rdev;
             /// <summary>
             /// total size, in bytes
             /// </summary>
-            Int64 st_size;
+            off_t st_size;
             /// <summary>
             /// blocksize for filesystem I/O
             /// </summary>
-            Int64 st_blksize;
+            blksize_t st_blksize;
             /// <summary>
             /// number of 512B blocks allocated
             /// </summary>
-            Int64 st_blocks;
+            blkcnt_t st_blocks;
             /// <summary>
             /// time of last access
             /// </summary>

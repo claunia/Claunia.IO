@@ -141,5 +141,174 @@ internal static partial class Interop
             /// <summary>do not show entry in df</summary>
             MNT_IGNORE = 0x0000000000800000
         }
+
+        public enum attrNamespace
+        {
+            /// <summary>
+            /// Empty namespace
+            /// </summary>
+            EXTATTR_NAMESPACE_EMPTY = 0x00000000,
+            /// <summary>
+            /// User namespace
+            /// </summary>
+            EXTATTR_NAMESPACE_USER = 0x00000001,
+            /// <summary>
+            /// System namespace
+            /// </summary>
+            EXTATTR_NAMESPACE_SYSTEM = 0x00000002
+        }
+
+        /// <summary>
+        /// File mode and permissions
+        /// </summary>
+        [Flags]
+        internal enum mode_t : ushort
+        {
+            /// <summary>type of file mask</summary>
+            S_IFMT = 0xF000,
+            /// <summary>named  pipe (fifo)</summary>
+            S_IFIFO = 0x1000,
+            /// <summary>character special</summary>
+            S_IFCHR = 0x2000,
+            /// <summary>directory</summary>
+            S_IFDIR = 0x4000,
+            /// <summary>block  special</summary>
+            S_IFBLK = 0x6000,
+            /// <summary>regular</summary>
+            S_IFREG = 0x8000,
+            /// <summary>symbolic link </summary>
+            S_IFLNK = 0xA000,
+            /// <summary>socket</summary>
+            S_IFSOCK = 0xC000,
+            /// <summary>whiteout</summary>
+            S_IFWHT = 0xE000,
+            /// <summary>set user id on execution</summary>
+            S_ISUID = 0x0800,
+            /// <summary>set group id on execution</summary>
+            S_ISGID = 0x0400,
+            /// <summary>save swapped text even after use</summary>
+            S_ISVTX = 0x0200,
+            /// <summary>RWX mask for owner</summary>
+            S_IRWXU = 0x01C0,
+            /// <summary>read permission, owner</summary>
+            S_IRUSR = 0x0100,
+            /// <summary>write  permission, owner</summary>
+            S_IWUSR = 0x0080,
+            /// <summary>execute/search permission, owner</summary>
+            S_IXUSR = 0x0040,
+            /// <summary>RWX mask for group</summary>
+            S_IRWXG = 0x0038,
+            /// <summary>read permission, group</summary>
+            S_IRGRP = 0x0020,
+            /// <summary>write  permission, group</summary>
+            S_IWGRP = 0x0010,
+            /// <summary>execute/search permission, group</summary>
+            S_IXGRP = 0x0008,
+            /// <summary>RWX mask for other</summary>
+            S_IRWXO = 0x0007,
+            /// <summary>read permission, other</summary>
+            S_IROTH = 0x0004,
+            /// <summary>write  permission, other</summary>
+            S_IWOTH = 0x0002,
+            /// <summary>execute/search permission, other</summary>
+            S_IXOTH = 0x0001
+        }
+
+        /// <summary>
+        /// User-set flags
+        /// </summary>
+        [Flags]
+        internal enum flags_t : uint
+        {
+            /// <summary>
+            /// Mask of owner changeable flags
+            /// </summary>
+            UF_SETTABLE = 0x0000FFFF,
+            /// <summary>
+            /// Do not dump file
+            /// </summary>
+            UF_NODUMP = 0x00000001,
+            /// <summary>
+            /// File may not be changed
+            /// </summary>
+            UF_IMMUTABLE = 0x00000002,
+            /// <summary>
+            /// Writes to file may only append
+            /// </summary>
+            UF_APPEND = 0x00000004,
+            /// <summary>
+            /// The directory is opaque when viewed through a union stack.
+            /// </summary>
+            UF_OPAQUE = 0x00000008,
+            /// <summary>
+            /// File may not be removed or renamed.
+            /// </summary>
+            UF_NOUNLINK = 0x00000010,
+            /// <summary>
+            /// File is compressed in HFS+ (>=10.6)
+            /// </summary>
+            [Obsolete("Unimplemented in FreeBSD")]
+            UF_COMPRESSED = 0x00000020,
+            /// <summary>
+            /// OBSOLETE: No longer used.
+            /// Issue notifications for deletes or renames of files with this flag set
+            /// </summary>
+            [Obsolete("Unimplemented in FreeBSD")]
+            UF_TRACKED = 0x00000040,
+            /// <summary>
+            /// Windows system file bit
+            /// </summary>
+            UF_SYSTEM = 0x00000080,
+            /// <summary>
+            /// Sparse file
+            /// </summary>
+            UF_SPARSE = 0x00000100,
+            /// <summary>
+            /// File is offline
+            /// </summary>
+            UF_OFFLINE = 0x00000200,
+            /// <summary>
+            /// Windows reparse point file bit
+            /// </summary>
+            UF_REPARSE = 0x00000400,
+            /// <summary>
+            /// File needs to be archived
+            /// </summary>
+            UF_ARCHIVE = 0x00000800,
+            /// <summary>
+            /// Windows readonly file bit
+            /// </summary>
+            UF_READONLY = 0x00001000,
+
+            /// <summary>
+            /// File is hidden
+            /// </summary>
+            UF_HIDDEN = 0x00008000,
+
+            /// <summary>
+            /// Mask of superuser changeable flags
+            /// </summary>
+            SF_SETTABLE = 0xffff0000,
+            /// <summary>
+            /// File is archived
+            /// </summary>
+            SF_ARCHIVED = 0x00010000,
+            /// <summary>
+            /// File may not be changed
+            /// </summary>
+            SF_IMMUTABLE = 0x00020000,
+            /// <summary>
+            /// Writes to file may only append
+            /// </summary>
+            SF_APPEND = 0x00040000,
+            /// <summary>
+            /// File may not be removed or renamed
+            /// </summary>
+            SF_NOUNLINK = 0x00100000,
+            /// <summary>
+            /// Snapshot inode
+            /// </summary>
+            SF_SNAPSHOT = 0x00200000
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Apple.xattr.cs
+// Interop.FreeBSD.extattr.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -26,93 +26,43 @@
 using System;
 using System.Runtime.InteropServices;
 
+#region FreeBSD 32-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int32;
+using gid_t = System.UInt32;
+using ino_t = System.UInt32;
+using int64_t = System.Int64;
+using nlink_t = System.UInt16;
+using off_t = System.Int64;
+using size_t = System.Int32;
+using ssize_t = System.Int32;
+using uid_t = System.UInt32;
+using uint32_t = System.UInt32;
+using uint64_t = System.UInt64;
+using __dev_t = System.UInt32;
+using __int32_t = System.Int32;
+using __uint32_t = System.UInt32;
+
+#endregion
+
+
 internal static partial class Interop
 {
     internal static partial class FreeBSD
     {
-        public enum attrNamespace
-        {
-            /// <summary>
-            /// Empty namespace
-            /// </summary>
-            EXTATTR_NAMESPACE_EMPTY = 0x00000000,
-            /// <summary>
-            /// User namespace
-            /// </summary>
-            EXTATTR_NAMESPACE_USER = 0x00000001,
-            /// <summary>
-            /// System namespace
-            /// </summary>
-            EXTATTR_NAMESPACE_SYSTEM = 0x00000002
-        }
-
-        /// <summary>
-        /// Gets an extended attribute value
-        /// Calls to system's extattr_get_file(2)
-        /// </summary>
-        /// <returns>Number of bytes read. If <paramref name="data"/> is <see cref="null"/>, then the size for the buffer to store the data.</returns>
-        /// <param name="path">Path to the file.</param>
-        /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
-        /// <param name="attrname">Extended attribute name.</param>
-        /// <param name="data">Pointer to buffer where to store the data.</param>
-        /// <param name="nbytes">Size of the buffer.</param>
-        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        public static extern Int64 extattr_get_file(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int64 nbytes);
-
-        /// <summary>
-        /// Sets an extended attribute value
-        /// Calls to system's extattr_set_file(2)
-        /// </summary>
-        /// <returns>Number of bytes written.</returns>
-        /// <param name="path">Path to the file.</param>
-        /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
-        /// <param name="attrname">Extended attribute name.</param>
-        /// <param name="data">Pointer where the data is stored.</param>
-        /// <param name="nbytes">Size of the data.</param>
-        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        public static extern Int64 extattr_set_file(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int64 nbytes);
-
-        /// <summary>
-        /// Deletes an extended attribute value
-        /// Calls to system's extattr_delete_file(2)
-        /// </summary>
-        /// <returns>0 if successful, -1 if failure.</returns>
-        /// <param name="path">Path to the file.</param>
-        /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
-        /// <param name="attrname">Extended attribute name.</param>
-        /// <param name="data">Pointer to buffer where the data is stored.</param>
-        /// <param name="nbytes">Size of the pointer.</param>
-        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        public static extern Int64 extattr_delete_file(string path, attrNamespace attrnamespace, string attrname);
-
-        /// <summary>
-        /// Gets a list of extended attributes that the file has in that namespace
-        /// The list is stored in the buffer as an undetermined length of Pascal strings,
-        /// 1 byte tells the size of the extended attribute name in bytes, and is followed by the name.
-        /// Calls to system's extattr_list_file(2)
-        /// </summary>
-        /// <returns>Size of the list in bytes. If <paramref name="data"/> is <see cref="null"/>, then the size for the buffer to store the list.</returns>
-        /// <param name="path">Path to the file.</param>
-        /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
-        /// <param name="attrname">Extended attribute name.</param>
-        /// <param name="data">Pointer to buffer where to store the list.</param>
-        /// <param name="nbytes">Size of the buffer.</param>
-        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
-        public static extern Int64 extattr_list_file(string path, attrNamespace attrnamespace, IntPtr data, Int64 nbytes);
-
         /// <summary>
         /// Gets an extended attribute value
         /// Calls to system's extattr_get_file(2)
         /// For 32-bit systems
         /// </summary>
-        /// <returns>Number of bytes read. If <paramref name="data"/> is <see cref="null"/>, then the size for the buffer to store the data.</returns>
+        /// <returns>Number of bytes read. If <paramref name="data"/> is <c>null</c>, then the size for the buffer to store the data.</returns>
         /// <param name="path">Path to the file.</param>
         /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
         /// <param name="attrname">Extended attribute name.</param>
         /// <param name="data">Pointer to buffer where to store the data.</param>
         /// <param name="nbytes">Size of the buffer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_get_file")]
-        public static extern Int32 extattr_get_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int32 nbytes);
+        public static extern ssize_t extattr_get_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, size_t nbytes);
 
         /// <summary>
         /// Sets an extended attribute value
@@ -126,7 +76,7 @@ internal static partial class Interop
         /// <param name="data">Pointer where the data is stored.</param>
         /// <param name="nbytes">Size of the data.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_set_file")]
-        public static extern Int32 extattr_set_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, Int32 nbytes);
+        public static extern ssize_t extattr_set_file32(string path, attrNamespace attrnamespace, string attrname, IntPtr data, size_t nbytes);
 
         /// <summary>
         /// Deletes an extended attribute value
@@ -137,10 +87,8 @@ internal static partial class Interop
         /// <param name="path">Path to the file.</param>
         /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
         /// <param name="attrname">Extended attribute name.</param>
-        /// <param name="data">Pointer to buffer where the data is stored.</param>
-        /// <param name="nbytes">Size of the pointer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_delete_file")]
-        public static extern Int32 extattr_delete_file32(string path, attrNamespace attrnamespace, string attrname);
+        public static extern ssize_t extattr_delete_file32(string path, attrNamespace attrnamespace, string attrname);
 
         /// <summary>
         /// Gets a list of extended attributes that the file has in that namespace
@@ -149,14 +97,13 @@ internal static partial class Interop
         /// Calls to system's extattr_list_file(2)
         /// For 32-bit systems
         /// </summary>
-        /// <returns>Size of the list in bytes. If <paramref name="data"/> is <see cref="null"/>, then the size for the buffer to store the list.</returns>
+        /// <returns>Size of the list in bytes. If <paramref name="data"/> is <c>null</c>, then the size for the buffer to store the list.</returns>
         /// <param name="path">Path to the file.</param>
         /// <param name="attrnamespace">Extended attribute namespace, <see cref="attrNamespace"/>.</param>
-        /// <param name="attrname">Extended attribute name.</param>
         /// <param name="data">Pointer to buffer where to store the list.</param>
         /// <param name="nbytes">Size of the buffer.</param>
         [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi, EntryPoint = "extattr_list_file")]
-        public static extern Int32 extattr_list_file32(string path, attrNamespace attrnamespace, IntPtr data, Int32 nbytes);
+        public static extern ssize_t extattr_list_file32(string path, attrNamespace attrnamespace, IntPtr data, size_t nbytes);
     }
 }
 
