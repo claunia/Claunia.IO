@@ -74,6 +74,7 @@
     <Compile Include="Interop\Windows\Interop.Windows.Files.cs" />
     <Compile Include="Interop\Windows\Interop.Windows.Streams.cs" />
     <Compile Include="Interop\Windows\Interop.Windows.Backup.cs" />
+    <Compile Include="Interop\Windows\Interop.Windows.Volumes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
