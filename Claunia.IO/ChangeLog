@@ -1,3 +1,8 @@
+2015-05-08  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
+	  Added README
+
 2015-05-07  Natalia Portillo  <claunia@claunia.com>
 
 	* Interop/Linux/Interop.Linux.stat.cs:
