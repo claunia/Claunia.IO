@@ -77,6 +77,11 @@
     <Compile Include="Interop\Windows\Interop.Windows.Volumes.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.stat64.cs" />
     <Compile Include="Interop\Apple\Interop.Apple.statfs64.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.extattr64.cs" />
+    <Compile Include="Interop\FreeBSD\Interop.FreeBSD.stat64.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.stat64.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.statfs64.cs" />
+    <Compile Include="Interop\Linux\Interop.Linux.xattr64.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

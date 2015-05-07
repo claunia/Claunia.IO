@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Linux.stat.cs
+// Interop.Linux.stat64.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -31,31 +31,27 @@ internal static partial class Interop
     internal static partial class Linux
     {
         /// <summary>
-        /// stat(2) structure when 32 bits
+        /// stat(2) structure when 64 bits
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        internal struct Stat
+        internal struct Stat64
         {
             /// <summary>
             /// ID of device containing file
             /// </summary>
             UInt64 st_dev;
             /// <summary>
-            /// padding
-            /// </summary>
-            UInt16 __pad1;
-            /// <summary>
             /// inode number
             /// </summary>
-            UInt32 st_ino;
+            UInt64 st_ino;
+            /// <summary>
+            /// number of hard links
+            /// </summary>
+            UInt64 st_nlink;
             /// <summary>
             /// protection
             /// </summary>
             mode_t st_mode;
-            /// <summary>
-            /// number of hard links
-            /// </summary>
-            UInt32 st_nlink;
             /// <summary>
             /// user ID of owner
             /// </summary>
@@ -65,52 +61,64 @@ internal static partial class Interop
             /// </summary>
             UInt32 st_gid;
             /// <summary>
+            /// padding
+            /// </summary>
+            Int32 __pad0;
+            /// <summary>
             /// device ID (if special file)
             /// </summary>
             UInt64 st_rdev;
             /// <summary>
-            /// padding
-            /// </summary>
-            UInt16 __pad2;
-            /// <summary>
             /// total size, in bytes
             /// </summary>
-            Int32 st_size;
+            Int64 st_size;
             /// <summary>
             /// blocksize for filesystem I/O
             /// </summary>
-            Int32 st_blksize;
+            Int64 st_blksize;
             /// <summary>
             /// number of 512B blocks allocated
             /// </summary>
-            Int32 st_blocks;
+            Int64 st_blocks;
             /// <summary>
             /// time of last access
             /// </summary>
-            Timespec st_atim;
+            Int64 st_atime;
+            /// <summary>
+            /// time of last access nanosecond
+            /// </summary>
+            UInt64 st_atimensec;
             /// <summary>
             /// time of last modification
             /// </summary>
-            Timespec st_mtim;
+            Int64 st_mtime;
+            /// <summary>
+            /// time of last modification naonsecond
+            /// </summary>
+            UInt64 st_mtimensec;
             /// <summary>
             /// time of last status change
             /// </summary>
-            Timespec st_ctim;
+            Int64 st_ctime;
+            /// <summary>
+            /// time of last status change nanosecond
+            /// </summary>
+            UInt64 st_ctimensec;
+            [MarshalAs(UnmanagedType.ByValArray, 
+                ArraySubType = UnmanagedType.I8, SizeConst = 3)]
             [Obsolete("RESERVED: DO NOT USE")]
-            UInt32 __glibc_reserved4;
-            [Obsolete("RESERVED: DO NOT USE")]
-            UInt32 __glibc_reserved5;
+            Int64[] __glibc_reserved;
         }
 
         /// <summary>
         /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat(2) for 32 bit systems
+        /// Calls to system's stat(2) for 64 bit systems
         /// </summary>
         /// <param name="path">Path to the file.</param>
-        /// <param name="buf"><see cref="Stat"/>.</param>
+        /// <param name="buf"><see cref="Stat64"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
-        [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int stat(string path, out Stat buf);
+        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "stat")]
+        public static extern int stat64(string path, out Stat64 buf);
     }
 }
 

@@ -247,5 +247,117 @@ internal static partial class Interop
             /// </summary>
             public Int32 tv_nsec;
         }
+
+        /// <summary>
+        /// File mode and permissions
+        /// </summary>
+        [Flags]
+        internal enum mode_t : UInt32
+        {
+            /// <summary>
+            ///    bit mask for the file type bit fields
+            /// </summary>
+            S_IFMT = 0xF000,
+            /// <summary>
+            /// socket
+            /// </summary>
+            S_IFSOCK = 0xC000,
+            /// <summary>
+            /// symbolic link
+            /// </summary>
+            S_IFLNK = 0xA000,
+            /// <summary>
+            /// regular file
+            /// </summary>
+            S_IFREG = 0x8000,
+            /// <summary>
+            /// block device
+            /// </summary>
+            S_IFBLK = 0x6000,
+            /// <summary>
+            /// directory
+            /// </summary>
+            S_IFDIR = 0x4000,
+            /// <summary>
+            /// character device
+            /// </summary>
+            S_IFCHR = 0x2000,
+            /// <summary>
+            /// FIFO
+            /// </summary>
+            S_IFIFO = 0x1000,
+            /// <summary>
+            /// set-user-ID bit
+            /// </summary>
+            S_ISUID = 0x0800,
+            /// <summary>
+            /// set-group-ID bit
+            /// </summary>
+            S_ISGID = 0x0400,
+            /// <summary>
+            /// sticky bit (see below)
+            /// </summary>
+            S_ISVTX = 0x0200,
+            /// <summary>
+            /// mask for file owner permissions
+            /// </summary>
+            S_IRWXU = 0x01C0,
+            /// <summary>
+            /// owner has read permission
+            /// </summary>
+            S_IRUSR = 0x0100,
+            /// <summary>
+            /// owner has write permission
+            /// </summary>
+            S_IWUSR = 0x0080,
+            /// <summary>
+            /// owner has execute permission
+            /// </summary>
+            S_IXUSR = 0x0040,
+            /// <summary>
+            /// mask for group permissions
+            /// </summary>
+            S_IRWXG = 0x0038,
+            /// <summary>
+            /// group has read permission
+            /// </summary>
+            S_IRGRP = 0x0020,
+            /// <summary>
+            /// group has write permission
+            /// </summary>
+            S_IWGRP = 0x0010,
+            /// <summary>
+            /// group has execute permission
+            /// </summary>
+            S_IXGRP = 0x0008,
+            /// <summary>
+            /// mask for permissions for others (not in group)
+            /// </summary>
+            S_IRWXO = 0x0007,
+            /// <summary>
+            /// others have read permission
+            /// </summary>
+            S_IROTH = 0x0004,
+            /// <summary>
+            /// others have write permission
+            /// </summary>
+            S_IWOTH = 0x002,
+            /// <summary>
+            /// others have execute permission
+            /// </summary>
+            S_IXOTH = 0x00001
+        }
+
+        public enum xattrFlags : int
+        {
+            /// <summary>
+            /// Set the value and fail if the xattr already exists
+            /// </summary>
+            XATTR_CREATE = 0x0001,
+            /// <summary>
+            /// Set the value and fail if the xattr does not exist
+            /// </summary>
+            XATTR_REPLACE = 0x0002
+        }
     }
 }

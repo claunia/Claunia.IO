@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Linux.stat.cs
+// Interop.FreeBSD.stat64.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -26,91 +26,110 @@
 using System.Runtime.InteropServices;
 using System;
 
+#region FreeBSD 64-bit type definitions
+using blkcnt_t = System.Int64;
+using blksize_t = System.Int32;
+using gid_t = System.UInt32;
+using ino_t = System.UInt32;
+using int64_t = System.Int64;
+using nlink_t = System.UInt16;
+using off_t = System.Int64;
+using size_t = System.Int64;
+using ssize_t = System.Int64;
+using uid_t = System.UInt32;
+using uint32_t = System.UInt32;
+using uint64_t = System.UInt64;
+using __dev_t = System.UInt32;
+using __int32_t = System.Int32;
+using __uint32_t = System.UInt32;
+
+#endregion
+
 internal static partial class Interop
 {
-    internal static partial class Linux
+    internal static partial class FreeBSD
     {
         /// <summary>
-        /// stat(2) structure when 32 bits
+        /// stat(2) structure when 64 bit
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        internal struct Stat
+        internal struct Stat64
         {
             /// <summary>
-            /// ID of device containing file
+            /// inode's device
             /// </summary>
-            UInt64 st_dev;
+            __dev_t st_dev;
             /// <summary>
-            /// padding
+            /// inode's number
             /// </summary>
-            UInt16 __pad1;
+            ino_t st_ino;
             /// <summary>
-            /// inode number
-            /// </summary>
-            UInt32 st_ino;
-            /// <summary>
-            /// protection
+            /// inode protection mode
             /// </summary>
             mode_t st_mode;
             /// <summary>
             /// number of hard links
             /// </summary>
-            UInt32 st_nlink;
+            nlink_t st_nlink;
             /// <summary>
-            /// user ID of owner
+            /// user ID of the file's owner
             /// </summary>
-            UInt32 st_uid;
+            uid_t st_uid;
             /// <summary>
-            /// group ID of owner
+            /// group ID of the file's group
             /// </summary>
-            UInt32 st_gid;
+            gid_t st_gid;
             /// <summary>
-            /// device ID (if special file)
+            /// device type
             /// </summary>
-            UInt64 st_rdev;
-            /// <summary>
-            /// padding
-            /// </summary>
-            UInt16 __pad2;
-            /// <summary>
-            /// total size, in bytes
-            /// </summary>
-            Int32 st_size;
-            /// <summary>
-            /// blocksize for filesystem I/O
-            /// </summary>
-            Int32 st_blksize;
-            /// <summary>
-            /// number of 512B blocks allocated
-            /// </summary>
-            Int32 st_blocks;
+            __dev_t st_rdev;
             /// <summary>
             /// time of last access
             /// </summary>
-            Timespec st_atim;
+            Timespec64 st_atim;
             /// <summary>
-            /// time of last modification
+            /// time of last data modification
             /// </summary>
-            Timespec st_mtim;
+            Timespec64 st_mtim;
             /// <summary>
-            /// time of last status change
+            /// time of last file status change
             /// </summary>
-            Timespec st_ctim;
-            [Obsolete("RESERVED: DO NOT USE")]
-            UInt32 __glibc_reserved4;
-            [Obsolete("RESERVED: DO NOT USE")]
-            UInt32 __glibc_reserved5;
+            Timespec64 st_ctim;
+            /// <summary>
+            /// file size, in bytes
+            /// </summary>
+            off_t st_size;
+            /// <summary>
+            /// blocks allocated for file
+            /// </summary>
+            blkcnt_t st_blocks;
+            /// <summary>
+            /// optimal blocksize for I/O
+            /// </summary>
+            blksize_t st_blksize;
+            /// <summary>
+            /// user defined flags for file
+            /// </summary>
+            flags_t st_flags;
+            /// <summary>
+            /// file generation number
+            /// </summary>
+            __uint32_t st_gen;
+            __int32_t st_lspare;
+            /// <summary>
+            /// time of file creation
+            /// </summary>
+            Timespec64 st_birthtim;
         }
 
         /// <summary>
         /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat(2) for 32 bit systems
+        /// Calls to system's stat64(2)
         /// </summary>
         /// <param name="path">Path to the file.</param>
-        /// <param name="buf"><see cref="Stat"/>.</param>
+        /// <param name="buf"><see cref="Stat64"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
-        [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int stat(string path, out Stat buf);
+        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "stat")]
+        public static extern int stat64(string path, out Stat64 buf);
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Linux.xattr.cs
+// Interop.Linux.xattr64.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -39,8 +39,8 @@ internal static partial class Interop
         /// <param name="value">Pointer to a buffer where to store the extended attribute.</param>
         /// <param name="size">Size of the allocated buffer.</param>
         /// <returns>Size of the extended attribute. On failure, -1, and errno is set</returns>
-        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "getxattr", CharSet = CharSet.Ansi)]
-        public static extern int getxattr32(string path, string name, IntPtr value, UInt32 size);
+        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
+        public static extern Int64 getxattr(string path, string name, IntPtr value, UInt64 size);
 
         /// <summary>
         /// Sets an extended attribute value
@@ -51,8 +51,8 @@ internal static partial class Interop
         /// <param name="value">Pointer to a buffer where the extended attribute is stored.</param>
         /// <param name="size">Size of the allocated buffer.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set</returns>
-        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "setxattr", CharSet = CharSet.Ansi)]
-        public static extern int setxattr32(string path, string name, IntPtr value, UInt32 size, xattrFlags options);
+        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
+        public static extern Int64 setxattr(string path, string name, IntPtr value, UInt64 size, xattrFlags options);
 
         /// <summary>
         /// Removes an extended attribute
@@ -61,8 +61,8 @@ internal static partial class Interop
         /// <param name="path">Path to the file.</param>
         /// <param name="name">Name of the extended attribute.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set</returns>
-        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "removexattr", CharSet = CharSet.Ansi)]
-        public static extern int removexattr32(string path, string name);
+        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
+        public static extern Int64 removexattr(string path, string name);
 
         /// <summary>
         /// Lists the extended attributes from a file
@@ -75,8 +75,7 @@ internal static partial class Interop
         /// On success, the size of the list.
         /// If the file has no extended attributes, 0.
         /// On failure, -1, and errno is set</returns>
-        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "listxattr", CharSet = CharSet.Ansi)]
-        public static extern int listxattr32(string path, IntPtr namebuf, UInt32 size);
+        [DllImport(Libraries.Libc, SetLastError = true, CharSet = CharSet.Ansi)]
+        public static extern Int64 listxattr(string path, IntPtr namebuf, UInt64 size);
     }
 }
-

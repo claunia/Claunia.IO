@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Linux.stat.cs
+// Interop.Linux.statfs.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -30,64 +30,6 @@ internal static partial class Interop
 {
     internal static partial class Linux
     {
-        /// <summary>
-        /// statfs(2) structure when __WORDSIZE is 64
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct StatFS64
-        {
-            /// <summary>
-            /// Type of filesystem (see below)
-            /// </summary>
-            Int64 f_type;
-            /// <summary>
-            /// Optimal transfer block size
-            /// </summary>
-            Int64 f_bsize;
-            /// <summary>
-            /// Total data blocks in filesystem
-            /// </summary>
-            UInt64 f_blocks;
-            /// <summary>
-            /// Free blocks in filesystem
-            /// </summary>
-            UInt64 f_bfree;
-            /// <summary>
-            /// Free blocks available to unprivileged user
-            /// </summary>
-            UInt64 f_bavail;
-            /// <summary>
-            /// Total file nodes in filesystem
-            /// </summary>
-            UInt64 f_files;
-            /// <summary>
-            /// Free file nodes in filesystem
-            /// </summary>
-            UInt64 f_ffree;
-            /// <summary>
-            /// Filesystem ID
-            /// </summary>
-            fsid_t f_fsid;
-            /// <summary>
-            /// Maximum length of filenames
-            /// </summary>
-            Int64 f_namelen;
-            /// <summary>
-            /// Fragment size (since Linux 2.6)
-            /// </summary>
-            Int64 f_frsize;
-            /// <summary>
-            /// Mount flags of filesystem (since Linux 2.6.36)
-            /// </summary>
-            f_flags64_t f_flags;
-            /// <summary>
-            /// Padding bytes reserved for future use
-            /// </summary>
-            [MarshalAs(UnmanagedType.ByValArray, 
-                ArraySubType = UnmanagedType.I8, SizeConst = 4)]
-            Int64[] f_spare;
-        }
-
         /// <summary>
         /// statfs(2) structure when __WORDSIZE is 32
         /// </summary>
@@ -156,17 +98,6 @@ internal static partial class Interop
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
         [DllImport(Libraries.Libc, SetLastError = true)]
         public static extern int statfs(string path, out StatFS buf);
-
-        /// <summary>
-        /// Obtains information of the file system mounted at <paramref name="path"/>.
-        /// Calls to system's statfs(2)
-        /// Only call if __WORDSIZE == 64
-        /// </summary>
-        /// <param name="path">Path to the filesystem mount point.</param>
-        /// <param name="buf"><see cref="StatFS64"/>.</param>
-        /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
-        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "statfs")]
-        public static extern int statfs64(string path, out StatFS64 buf);
     }
 }
 

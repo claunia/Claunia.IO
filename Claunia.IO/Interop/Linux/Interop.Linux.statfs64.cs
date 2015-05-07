@@ -1,5 +1,5 @@
 ﻿//
-// Interop.Linux.stat.cs
+// Interop.Linux.statfs64.cs
 //
 // Author:
 //       Natalia Portillo <claunia@claunia.com>
@@ -31,86 +31,73 @@ internal static partial class Interop
     internal static partial class Linux
     {
         /// <summary>
-        /// stat(2) structure when 32 bits
+        /// statfs(2) structure when __WORDSIZE is 64
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        internal struct Stat
+        internal struct StatFS64
         {
             /// <summary>
-            /// ID of device containing file
+            /// Type of filesystem (see below)
             /// </summary>
-            UInt64 st_dev;
+            Int64 f_type;
             /// <summary>
-            /// padding
+            /// Optimal transfer block size
             /// </summary>
-            UInt16 __pad1;
+            Int64 f_bsize;
             /// <summary>
-            /// inode number
+            /// Total data blocks in filesystem
             /// </summary>
-            UInt32 st_ino;
+            UInt64 f_blocks;
             /// <summary>
-            /// protection
+            /// Free blocks in filesystem
             /// </summary>
-            mode_t st_mode;
+            UInt64 f_bfree;
             /// <summary>
-            /// number of hard links
+            /// Free blocks available to unprivileged user
             /// </summary>
-            UInt32 st_nlink;
+            UInt64 f_bavail;
             /// <summary>
-            /// user ID of owner
+            /// Total file nodes in filesystem
             /// </summary>
-            UInt32 st_uid;
+            UInt64 f_files;
             /// <summary>
-            /// group ID of owner
+            /// Free file nodes in filesystem
             /// </summary>
-            UInt32 st_gid;
+            UInt64 f_ffree;
             /// <summary>
-            /// device ID (if special file)
+            /// Filesystem ID
             /// </summary>
-            UInt64 st_rdev;
+            fsid_t f_fsid;
             /// <summary>
-            /// padding
+            /// Maximum length of filenames
             /// </summary>
-            UInt16 __pad2;
+            Int64 f_namelen;
             /// <summary>
-            /// total size, in bytes
+            /// Fragment size (since Linux 2.6)
             /// </summary>
-            Int32 st_size;
+            Int64 f_frsize;
             /// <summary>
-            /// blocksize for filesystem I/O
+            /// Mount flags of filesystem (since Linux 2.6.36)
             /// </summary>
-            Int32 st_blksize;
+            f_flags64_t f_flags;
             /// <summary>
-            /// number of 512B blocks allocated
+            /// Padding bytes reserved for future use
             /// </summary>
-            Int32 st_blocks;
-            /// <summary>
-            /// time of last access
-            /// </summary>
-            Timespec st_atim;
-            /// <summary>
-            /// time of last modification
-            /// </summary>
-            Timespec st_mtim;
-            /// <summary>
-            /// time of last status change
-            /// </summary>
-            Timespec st_ctim;
-            [Obsolete("RESERVED: DO NOT USE")]
-            UInt32 __glibc_reserved4;
-            [Obsolete("RESERVED: DO NOT USE")]
-            UInt32 __glibc_reserved5;
+            [MarshalAs(UnmanagedType.ByValArray, 
+                ArraySubType = UnmanagedType.I8, SizeConst = 4)]
+            Int64[] f_spare;
         }
 
         /// <summary>
-        /// Obtains information of the file pointed by <paramref name="path"/>.
-        /// Calls to system's stat(2) for 32 bit systems
+        /// Obtains information of the file system mounted at <paramref name="path"/>.
+        /// Calls to system's statfs(2)
+        /// Only call if __WORDSIZE == 64
         /// </summary>
-        /// <param name="path">Path to the file.</param>
-        /// <param name="buf"><see cref="Stat"/>.</param>
+        /// <param name="path">Path to the filesystem mount point.</param>
+        /// <param name="buf"><see cref="StatFS64"/>.</param>
         /// <returns>On success, 0. On failure, -1, and errno is set.</returns>
-        [DllImport(Libraries.Libc, SetLastError = true)]
-        public static extern int stat(string path, out Stat buf);
+        [DllImport(Libraries.Libc, SetLastError = true, EntryPoint = "statfs")]
+        public static extern int statfs64(string path, out StatFS64 buf);
     }
 }
 

@@ -1,5 +1,19 @@
 2015-05-07  Natalia Portillo  <claunia@claunia.com>
 
+	* Claunia.IO.csproj:
+	* Interop/Linux/Interop.Linux.stat.cs:
+	* Interop/Linux/Interop.Linux.xattr.cs:
+	* Interop/Linux/Interop.Linux.types.cs:
+	* Interop/Linux/Interop.Linux.statfs.cs:
+	* Interop/Linux/Interop.Linux.stat64.cs:
+	* Interop/Linux/Interop.Linux.xattr64.cs:
+	* Interop/Linux/Interop.Linux.statfs64.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.stat64.cs:
+	* Interop/FreeBSD/Interop.FreeBSD.extattr64.cs:
+	  Separate 32-bit from 64-bit calls.
+
+2015-05-07  Natalia Portillo  <claunia@claunia.com>
+
 	* Interop/FreeBSD/Interop.FreeBSD.types.cs:
 	  Correct order of XML documentation lines.
 
