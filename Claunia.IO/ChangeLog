@@ -1,6 +1,11 @@
 2015-05-08  Natalia Portillo  <claunia@claunia.com>
 
 	* Claunia.IO.csproj:
+	  Copy README and LICENSE to output folder
+
+2015-05-08  Natalia Portillo  <claunia@claunia.com>
+
+	* Claunia.IO.csproj:
 	  Added README
 
 2015-05-07  Natalia Portillo  <claunia@claunia.com>
