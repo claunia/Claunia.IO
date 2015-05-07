@@ -28,6 +28,13 @@ using System;
 using Microsoft.Win32.SafeHandles;
 using System.IO;
 
+#region Win32 type definitions
+using BOOL = System.Boolean;
+using DWORD = System.UInt32;
+using HANDLE = Microsoft.Win32.SafeHandles.SafeFileHandle;
+using LPVOID = System.IntPtr;
+#endregion
+
 internal static partial class Interop
 {
     internal static partial class Windows
@@ -214,6 +221,157 @@ internal static partial class Interop
             FileAccess dwDesiredAccess, FileShare dwShareMode,
             IntPtr lpSecurityAttributes, FileMode dwCreationDisposition,
             int dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+        public enum FILE_INFO_BY_HANDLE_CLASS { 
+            /// <summary>
+            /// Minimal information for the file should be retrieved or set.
+            /// <see cref="FILE_BASIC_INFO"/> 
+            /// </summary>
+            FileBasicInfo                   = 0,
+            /// <summary>
+            /// Extended information for the file should be retrieved.
+            /// <see cref="FILE_STANDARD_INFO"/> 
+            /// </summary>
+            FileStandardInfo                = 1,
+            /// <summary>
+            /// The file name should be retrieved.
+            /// <see cref="FILE_NAME_INFO"/> 
+            /// </summary>
+            FileNameInfo                    = 2,
+            /// <summary>
+            /// The file name should be changed.
+            /// <see cref="FILE_RENAME_INFO"/> 
+            /// </summary>
+            FileRenameInfo                  = 3,
+            /// <summary>
+            /// The file should be deleted.
+            /// <see cref="FILE_DISPOSITION_INFO"/> 
+            /// </summary>
+            FileDispositionInfo             = 4,
+            /// <summary>
+            /// The file allocation information should be changed.
+            /// <see cref="FILE_ALLOCATION_INFO"/> 
+            /// </summary>
+            FileAllocationInfo              = 5,
+            /// <summary>
+            /// The end of the file should be set.
+            /// <see cref="FILE_END_OF_FILE_INFO"/> 
+            /// </summary>
+            FileEndOfFileInfo               = 6,
+            /// <summary>
+            /// File stream information for the specified file should be retrieved.
+            /// <see cref="FILE_STREAM_INFO"/> 
+            /// </summary>
+            FileStreamInfo                  = 7,
+            /// <summary>
+            /// File compression information should be retrieved.
+            /// <see cref="FILE_COMPRESSION_INFO"/> 
+            /// </summary>
+            FileCompressionInfo             = 8,
+            /// <summary>
+            /// File attribute information should be retrieved.
+            /// <see cref="FILE_ATTRIBUTE_TAG_INFO"/> 
+            /// </summary>
+            FileAttributeTagInfo            = 9,
+            /// <summary>
+            /// Files in the specified directory should be retrieved. Used for directory handles.
+            /// Use only when calling GetFileInformationByHandleEx.
+            /// The number of files returned for each call to GetFileInformationByHandleEx depends
+            /// on the size of the buffer that is passed to the function. Any subsequent
+            /// calls to GetFileInformationByHandleEx on the same handle will resume the
+            /// enumeration operation after the last file is returned.
+            /// <see cref="FILE_ID_BOTH_DIR_INFO"/> 
+            /// </summary>
+            FileIdBothDirectoryInfo         = 10,
+            /// <summary>
+            /// Identical to <see cref="FileIdBothDirectoryInfo"/>, but forces the enumeration operation to start again from the beginning.
+            /// <see cref="FILE_ID_BOTH_DIR_INFO"/> 
+            /// </summary>
+            FileIdBothDirectoryRestartInfo  = 11,
+            /// <summary>
+            /// Priority hint information should be set.
+            /// <see cref="FILE_IO_PRIORITY_HINT_INFO"/> 
+            /// </summary>
+            FileIoPriorityHintInfo          = 12,
+            /// <summary>
+            /// File remote protocol information should be retrieved.
+            /// <see cref="FILE_REMOTE_PROTOCOL_INFO"/> 
+            /// </summary>
+            FileRemoteProtocolInfo          = 13,
+            /// <summary>
+            /// Files in the specified directory should be retrieved.
+            /// <see cref="FILE_FULL_DIR_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileFullDirectoryInfo           = 14,
+            /// <summary>
+            /// Identical to FileFullDirectoryInfo, but forces the enumeration operation to start again from the beginning.
+            /// <see cref="FILE_FULL_DIR_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileFullDirectoryRestartInfo    = 15,
+            /// <summary>
+            /// File storage information should be retrieved.
+            /// <see cref="FILE_STORAGE_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileStorageInfo                 = 16,
+            /// <summary>
+            /// File alignment information should be retrieved.
+            /// <see cref="FILE_ALIGNMENT_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileAlignmentInfo               = 17,
+            /// <summary>
+            /// File information should be retrieved.
+            /// <see cref="FILE_ID_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileIdInfo                      = 18,
+            /// <summary>
+            /// Files in the specified directory should be retrieved.
+            /// <see cref="FILE_ID_EXTD_DIR_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileIdExtdDirectoryInfo         = 19,
+            /// <summary>
+            /// Identical to FileIdExtdDirectoryInfo, but forces the enumeration operation to start again from the beginning.
+            /// <see cref="FILE_ID_EXTD_DIR_INFO"/> 
+            /// This value is not supported before Windows 8 and Windows Server 2012
+            /// </summary>
+            FileIdExtdDirectoryRestartInfo  = 20,
+            /// <summary>
+            /// This value is used for validation. Supported values are less than this value.
+            /// </summary>
+            MaximumFileInfoByHandlesClass
+        }
+
+        /// <summary>
+        /// Retrieves file information for the specified file.
+        /// </summary>
+        /// <returns><c>true</c>, if file was created, <c>false</c> otherwise.</returns>
+        /// <param name="hFile">A handle to the file that contains the information to be retrieved.
+        /// This handle should not be a pipe handle.</param>
+        /// <param name="FileInformationClass">A <see cref="FILE_INFO_BY_HANDLE_CLASS"/> enumeration value that specifies the type of information to be retrieved.</param>
+        /// <param name="lpFileInformation">A pointer to the buffer that receives the requested file information. The structure that is returned corresponds to the class that is specified by <paramref name="FileInformationClass"/>.</param>
+        /// <param name="dwBufferSize">The size of the <paramref name="lpFileInformation"/> buffer, in bytes.</param>
+        [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern BOOL GetFileInformationByHandleEx(HANDLE hFile,
+            FILE_INFO_BY_HANDLE_CLASS FileInformationClass, out LPVOID lpFileInformation,
+            DWORD dwBufferSize);
+
+        /// <summary>
+        /// Retrieves file information for the specified file.
+        /// </summary>
+        /// <returns><c>true</c>, if file information by handle ex was gotten, <c>false</c> otherwise.</returns>
+        /// <param name="hFile">A handle to the file that contains the information to be retrieved.
+        /// This handle should not be a pipe handle.</param>
+        /// <param name="lpFileInformation">A pointer to a <see cref="BY_HANDLE_FILE_INFORMATION"/> structure that receives the file information.</param>
+        [DllImport(Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern BOOL GetFileInformationByHandleEx(HANDLE hFile,
+            ref BY_HANDLE_FILE_INFORMATION lpFileInformation);
     }
 }
 

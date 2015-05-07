@@ -1,5 +1,12 @@
 2015-05-07  Natalia Portillo  <claunia@claunia.com>
 
+	* Interop/Windows/Interop.Windows.Files.cs:
+	* Interop/Windows/Interop.Windows.types.cs:
+	  Implemented Kernel32's GetFileInformationByHandle() and
+	  GetFileInformationByHandleEx().
+
+2015-05-07  Natalia Portillo  <claunia@claunia.com>
+
 	* Claunia.IO.csproj:
 	* Interop/Windows/Interop.Windows.Volumes.cs:
 	  Added Kernel32's GetVolumeInformation.
