@@ -72,74 +72,74 @@ internal static partial class Interop
         [Flags]
         enum mntflags_t : UInt64
         {
-            MNT_RDONLY = 0x0000000000000001,
             /// <summary>read only filesystem</summary>
-            MNT_SYNCHRONOUS = 0x0000000000000002,
+            MNT_RDONLY = 0x0000000000000001,
             /// <summary>fs written synchronously</summary>
-            MNT_NOEXEC = 0x0000000000000004,
+            MNT_SYNCHRONOUS = 0x0000000000000002,
             /// <summary>can't exec from filesystem</summary>
-            MNT_NOSUID = 0x0000000000000008,
+            MNT_NOEXEC = 0x0000000000000004,
             /// <summary>don't honor setuid fs bits</summary>
-            MNT_NFS4ACLS = 0x0000000000000010,
+            MNT_NOSUID = 0x0000000000000008,
             /// <summary>enable NFS version 4 ACLs</summary>
-            MNT_UNION = 0x0000000000000020,
+            MNT_NFS4ACLS = 0x0000000000000010,
             /// <summary>union with underlying fs</summary>
-            MNT_ASYNC = 0x0000000000000040,
+            MNT_UNION = 0x0000000000000020,
             /// <summary>fs written asynchronously</summary>
-            MNT_SUIDDIR = 0x0000000000100000,
+            MNT_ASYNC = 0x0000000000000040,
             /// <summary>special SUID dir handling</summary>
-            MNT_SOFTDEP = 0x0000000000200000,
+            MNT_SUIDDIR = 0x0000000000100000,
             /// <summary>using soft updates</summary>
-            MNT_NOSYMFOLLOW = 0x0000000000400000,
+            MNT_SOFTDEP = 0x0000000000200000,
             /// <summary>do not follow symlinks</summary>
-            MNT_GJOURNAL = 0x0000000002000000,
+            MNT_NOSYMFOLLOW = 0x0000000000400000,
             /// <summary>GEOM journal support enabled</summary>
-            MNT_MULTILABEL = 0x0000000004000000,
+            MNT_GJOURNAL = 0x0000000002000000,
             /// <summary>MAC support for objects</summary>
-            MNT_ACLS = 0x0000000008000000,
+            MNT_MULTILABEL = 0x0000000004000000,
             /// <summary>ACL support enabled</summary>
-            MNT_NOATIME = 0x0000000010000000,
+            MNT_ACLS = 0x0000000008000000,
             /// <summary>dont update file access time</summary>
-            MNT_NOCLUSTERR = 0x0000000040000000,
+            MNT_NOATIME = 0x0000000010000000,
             /// <summary>disable cluster read</summary>
-            MNT_NOCLUSTERW = 0x0000000080000000,
+            MNT_NOCLUSTERR = 0x0000000040000000,
             /// <summary>disable cluster write</summary>
-            MNT_SUJ = 0x0000000100000000,
+            MNT_NOCLUSTERW = 0x0000000080000000,
             /// <summary>using journaled soft updates</summary>
-            MNT_AUTOMOUNTED = 0x0000000200000000,
+            MNT_SUJ = 0x0000000100000000,
             /// <summary>mounted by automountd(8)</summary>
+            MNT_AUTOMOUNTED = 0x0000000200000000,
              
             /*
               * NFS export related mount flags.
               */
-            MNT_EXRDONLY = 0x0000000000000080,
             /// <summary>exported read only</summary>
-            MNT_EXPORTED = 0x0000000000000100,
+            MNT_EXRDONLY = 0x0000000000000080,
             /// <summary>filesystem is exported</summary>
-            MNT_DEFEXPORTED = 0x0000000000000200,
+            MNT_EXPORTED = 0x0000000000000100,
             /// <summary>exported to the world</summary>
-            MNT_EXPORTANON = 0x0000000000000400,
+            MNT_DEFEXPORTED = 0x0000000000000200,
             /// <summary>anon uid mapping for all</summary>
-            MNT_EXKERB = 0x0000000000000800,
+            MNT_EXPORTANON = 0x0000000000000400,
             /// <summary>exported with Kerberos</summary>
-            MNT_EXPUBLIC = 0x0000000020000000,
+            MNT_EXKERB = 0x0000000000000800,
             /// <summary>public export (WebNFS)</summary>
+            MNT_EXPUBLIC = 0x0000000020000000,
              
             /*
               * Flags set by internal operations,
               * but visible to the user.
               * XXX some of these are not quite right.. (I've never seen the root flag set)
               */
-            MNT_LOCAL = 0x0000000000001000,
             /// <summary>filesystem is stored locally</summary>
-            MNT_QUOTA = 0x0000000000002000,
+            MNT_LOCAL = 0x0000000000001000,
             /// <summary>quotas are enabled on fs</summary>
-            MNT_ROOTFS = 0x0000000000004000,
+            MNT_QUOTA = 0x0000000000002000,
             /// <summary>identifies the root fs</summary>
-            MNT_USER = 0x0000000000008000,
+            MNT_ROOTFS = 0x0000000000004000,
             /// <summary>mounted by a user</summary>
-            MNT_IGNORE = 0x0000000000800000
+            MNT_USER = 0x0000000000008000,
             /// <summary>do not show entry in df</summary>
+            MNT_IGNORE = 0x0000000000800000
         }
     }
 }
