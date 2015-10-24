@@ -1,5 +1,5 @@
 language: csharp
-solution: DiscImageChef.sln
+solution: Claunia.IO.sln
 mono:
  - latest
  - alpha
