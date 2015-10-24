@@ -55,6 +55,7 @@ It is currently under heavy development and will take some time to be complete.
 ### Platform APIs:
 * A high-level, .NET object-based access to all information obtainable by low-level APIs
 * A working replacement of .NET FileInfo, DirectoryInfo and FileStream classes where applicable
+
 ### Interchange containers:
 * AppleSingle
 * AppleDouble
@@ -68,6 +69,7 @@ It is currently under heavy development and will take some time to be complete.
 * Cygwin EAs.
 * Windows NT Server ADS for Mac OS metadata and forks
 * Archive Utility.app "__MACOSX" folders
+
 ### Tools:
 * Methods to convert between containers and native capatibilities
 * Methods to handle and understand, and where applicable convert, between same metadata stored in different formats and places (e.g. rename a 8.3 filename to the name stored by PC Exchange)
